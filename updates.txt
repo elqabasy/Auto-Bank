@@ -1,1 +1,21 @@
+;aiu;
 
+[General]
+MessageTitle = Auto-Bank New Update 
+MessageBody = There are new updates
+MessageExpirationDate = 09/05/2024
+
+[Update]
+Name = Auto-Bank
+ProductVersion = 2.0.0.0
+URL = https://github.com/elqabasy/Auto-Bank/releases/download/Basic/Auto-Bank-Installer.exe
+Size = 182494919
+SHA256 = 56105F1E966BDE4C29EA6176173D8D6CFAB3C4EE6D33CCA5FA2B8C7C05DC799E
+MD5 = 98ec0400e0e3b49dce94ccaa40ff72c9
+ServerFileName = Auto-Bank-Installer.exe
+Flags = Critical
+RegistryKey = HKUD\Software\Mahros AL-Qabasy\Auto-Bank\Version
+Version = 2.0.0.0
+Description = This is new version: V2.0.0.0
+Feature = Adding New color
+Enhancement = no any enhancement
