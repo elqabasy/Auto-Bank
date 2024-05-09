@@ -11,9 +11,10 @@ def Main():
     # Style
     APP_SETTINGS = Settings("Mahros AL-Qabasy", "Auto-Bank")
 
+    App.setApplicationVersion("1.0.0")
     App.setWindowIcon(QIcon(":/design/icons/.ico/app.ico"))
     App.setApplicationName(APP_SETTINGS.load_setting("Name", "Auto-Bank"))
-    App.setApplicationVersion(APP_SETTINGS.load_setting("Version", "1.0.0"))
+    # App.setApplicationVersion(APP_SETTINGS.load_setting("Version", "1.0.0"))
     
     # fonts 
     fonts_dir = os.path.join(BASE_DIR, "design/fonts/")

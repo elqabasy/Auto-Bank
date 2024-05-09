@@ -4,18 +4,13 @@ from openpyxl import Workbook
 from database import DATABASE
 from settings import Settings
 from PySide6.QtCore import QUrl
-from automation import BankMisrAutomator
-from ErrorSignal import ErrorSignal
-from PySide6.QtGui import QIcon, Qt
 import pyperclip, os, random, datetime
 from design.py.home import Ui_MainWindowHome
+from PySide6.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem
 from PySide6.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from PySide6.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QTableWidget, QLabel
 class Home(QMainWindow, Ui_MainWindowHome):
     Message = QMessageBox
     timer = QtCore.QTimer()
-    # _errorSignal = ErrorSignal()
-    # _automator = BankMisrAutomator(_errorSignal)
     _settings = Settings("Mahros AL-Qabasy", "Auto-Bank")
     _url = "https://digital.banquemisr.com/bmonlinebusiness/customer-login"
     def __init__(self):
@@ -25,8 +20,6 @@ class Home(QMainWindow, Ui_MainWindowHome):
         self.setupUi(self)
         self.setWindowFlag(QtCore.Qt.WindowType.WindowCloseButtonHint, True)
         self.widgetWebPage.hide()
-        # self._automator.login(self.lineEditUsername.text(), self.lineEditPassword.text())
-        # self._errorSignal.error_occurred.connect(self.showError)
 
         self.initView()
         self.initDeafaults()
@@ -42,10 +35,8 @@ class Home(QMainWindow, Ui_MainWindowHome):
 
     def on_load_started(self):
         self.labelWebsiteLoadPrpgress.setText("يتم تحميل الموقع الان")
-
     def on_load_progress(self, progress):
         self.labelWebsiteLoadPrpgress.setText(f"جاري التحميل ... {progress}%")
-
     def on_load_finished(self, ok):
         if ok:
             self.labelWebsiteLoadPrpgress.setText("تم التحميل بنجاح")
@@ -55,26 +46,9 @@ class Home(QMainWindow, Ui_MainWindowHome):
             self.labelWebsiteLoadPrpgress.setText("فشل الاتحميل")
 
     def initView(self):
-        # self.radioButtonAccountStatus.
         self.statusbar.showMessage("جاري تهيئة البرنامج")
         self.timer.timeout.connect(lambda: self.checkWebsiteStatus())
         self.timer.timeout.connect(lambda: self.statusbar.showMessage("مستعد"))
-
-        # Create a label and set its properties
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyPath.setText("نسخ"))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyUsername.setText("نسخ"))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyPassword.setText("نسخ"))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyBankCode.setText("نسخ"))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyCustomerName.setText("نسخ"))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyAccountNumber.setText("نسخ"))
-
-        # icon = QIcon(QIcon.fromTheme(u"edit-copy"))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyPath.setIcon(icon))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyUsername.setIcon(icon))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyBankCode.setIcon(icon))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyPassword.setIcon(icon))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyCustomerName.setIcon(icon))
-        # self.timer.timeout.connect(lambda: self.pushButtonCopyAccountNumber.setIcon(icon))
         
         self.timer.start(3500)
 
@@ -111,20 +85,20 @@ class Home(QMainWindow, Ui_MainWindowHome):
     def initDeafaults(self):
         # defaults
         # username, password
-        username = str(self._settings.load_setting("data/username", ""))
+        username = str(self._settings.load_setting("data/defaultUsername", ""))
         self.lineEditUsername.setText(username)
         self.lineEditUsername.setText(username)
 
-        password = str(self._settings.load_setting("data/password", ""))
+        password = str(self._settings.load_setting("data/defaultPassword", ""))
         self.lineEditPassword.setText(password)
 
-        defaultAccountNumber = str(self._settings.load_setting("data/accountNumber", ""))
+        defaultAccountNumber = str(self._settings.load_setting("data/defaultAccountNumber", ""))
         self.lineEditDefaultAccountNumber.setText(defaultAccountNumber)
         
-        defaultBankCode = str(self._settings.load_setting("data/bankCode", ""))
+        defaultBankCode = str(self._settings.load_setting("data/defaultBankCode", ""))
         self.lineEditDefaultBankCode.setText(defaultBankCode)
         
-        defaultCustomerName = str(self._settings.load_setting("data/customerName", ""))
+        defaultCustomerName = str(self._settings.load_setting("data/defaultCustomerName", ""))
         self.lineEditDefaultCustomerName.setText(defaultCustomerName)
 
     def checkWebsiteStatus(self):
@@ -187,11 +161,11 @@ class Home(QMainWindow, Ui_MainWindowHome):
         # self.lineEditUsername.connect(lambda: pyperclip.copy(self.lineEditXLSXPath.text()))
         # self.pushButtonCopyUsername.clicked.connect(lambda: pyperclip.copy(self.lineEditUsername.text()))
         # defaults
-        self.lineEditUsername.textChanged.connect(lambda: self._settings.save_setting("data/username", self.lineEditUsername.text().strip()))
-        self.lineEditPassword.textChanged.connect(lambda: self._settings.save_setting("data/password", self.lineEditPassword.text().strip()))
-        self.lineEditDefaultCustomerName.textChanged.connect(lambda: self._settings.save_setting("data/customerName", self.lineEditDefaultCustomerName.text().strip()))
-        self.lineEditDefaultBankCode.textChanged.connect(lambda: self._settings.save_setting("data/bankCode", self.lineEditDefaultBankCode.text().strip()))
-        self.lineEditDefaultAccountNumber.textChanged.connect(lambda: self._settings.save_setting("data/accountNumber", self.lineEditDefaultAccountNumber.text().strip()))
+        self.lineEditUsername.textChanged.connect(lambda: self._settings.save_setting("data/defaultUsername", self.lineEditUsername.text().strip()))
+        self.lineEditPassword.textChanged.connect(lambda: self._settings.save_setting("data/defaultPassword", self.lineEditPassword.text().strip()))
+        self.lineEditDefaultCustomerName.textChanged.connect(lambda: self._settings.save_setting("data/defaultCustomerName", self.lineEditDefaultCustomerName.text().strip()))
+        self.lineEditDefaultBankCode.textChanged.connect(lambda: self._settings.save_setting("data/defaultBankCode", self.lineEditDefaultBankCode.text().strip()))
+        self.lineEditDefaultAccountNumber.textChanged.connect(lambda: self._settings.save_setting("data/defaultAccountNumber", self.lineEditDefaultAccountNumber.text().strip()))
 
 
         # animation
@@ -213,8 +187,8 @@ class Home(QMainWindow, Ui_MainWindowHome):
     def refreshApplication(self):
         self.tableWidgetData.setRowCount(0)
         self.widgetWebPage.load(QUrl(self._url))
+        # self.widgetWebPag
         
-
     def closeCurrentSession(self):
         pass
     
@@ -222,7 +196,6 @@ class Home(QMainWindow, Ui_MainWindowHome):
         self.tabWidgetHome.setCurrentWidget(self.tabUploadData)
         # self.save_table_to_excel()
         self.Generate()
-
     
     def Delete(self):
         row = self.tableWidgetData.currentRow()
@@ -329,7 +302,6 @@ class Home(QMainWindow, Ui_MainWindowHome):
 
     def showSuccess(self, message):
         QMessageBox.information(self, "نجاح", message)
-
 
     def closeEvent(self, event):
         if os.path.exists(self.lineEditXLSXPath.text()):
