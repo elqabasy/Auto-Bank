@@ -12,7 +12,3 @@ class Settings:
 
     def remove_setting(self, key):
         self.settings.remove(key)
-
-# if __name__ == "__main__":
-#     settings_manager = Settings('AL-Qabasy', 'Bank-Automation')
-    # settings_manager.save_setting('username', 'user123')

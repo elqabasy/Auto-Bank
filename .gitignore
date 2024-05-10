@@ -160,6 +160,10 @@ cython_debug/
 #.idea/
 notes.py
 
-
 # me
 setup/
+design/ui/
+source/auth.py
+source/ErrorSignal.py
+source/automation.py
+test.py

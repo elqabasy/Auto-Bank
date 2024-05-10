@@ -1,0 +1,12 @@
+import os
+DB_NAME = "database.db"
+BASE_DIR = os.path.abspath(os.curdir)
+BACKUP_DIR = os.path.abspath("backup")
+
+TIMER_TIMEOUT = 2000
+MESSAGE_TIMEOUT = 1000
+REG_VALUES_APP_NAME = "Bank-Automation"
+REG_VALUES_ORGANIZATION = "Mahros AL-Qabasy"
+ME_UUID         = "4C4C4544-0052-3810-8058-B8C04F353633".upper()
+CUSTOMER_UUID   = "41A53C66-EFDE-11EA-80E7-5405DB49F1A".upper()
+CUSTOMER_UUID2   = "3E936F06-F005-11E5-B60A-C4AA890DD000".upper()   

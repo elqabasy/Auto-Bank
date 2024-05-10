@@ -29,6 +29,12 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_10">
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="spacing">
@@ -40,7 +46,7 @@
          <number>9</number>
         </property>
         <property name="topMargin">
-         <number>9</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
          <number>9</number>
@@ -52,6 +58,18 @@
          <widget class="QRadioButton" name="radioButtonAccountStatus">
           <property name="enabled">
            <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>73</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>73</width>
+            <height>16777215</height>
+           </size>
           </property>
           <property name="font">
            <font>
@@ -125,6 +143,12 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButtonRefresh">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>35</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <family>Cairo</family>
@@ -175,10 +199,16 @@
             <property name="layoutDirection">
              <enum>Qt::LayoutDirection::RightToLeft</enum>
             </property>
+            <property name="tabPosition">
+             <enum>QTabWidget::TabPosition::North</enum>
+            </property>
             <property name="currentIndex">
              <number>0</number>
             </property>
             <property name="documentMode">
+             <bool>false</bool>
+            </property>
+            <property name="movable">
              <bool>false</bool>
             </property>
             <property name="tabBarAutoHide">
@@ -431,6 +461,9 @@
                        <property name="currentText">
                         <string/>
                        </property>
+                       <property name="minimumContentsLength">
+                        <number>11</number>
+                       </property>
                        <property name="placeholderText">
                         <string>انتظر كود البنك</string>
                        </property>
@@ -455,6 +488,9 @@
                          <family>Cairo</family>
                          <pointsize>9</pointsize>
                         </font>
+                       </property>
+                       <property name="layoutDirection">
+                        <enum>Qt::LayoutDirection::RightToLeft</enum>
                        </property>
                        <property name="editable">
                         <bool>false</bool>
@@ -491,8 +527,11 @@
                          <pointsize>9</pointsize>
                         </font>
                        </property>
+                       <property name="maxLength">
+                        <number>16</number>
+                       </property>
                        <property name="placeholderText">
-                        <string>ادخل رقم الحساب الذي ستم تحويل له المبلغ</string>
+                        <string>ادخل رقم الحساب المكون من 16 رقم</string>
                        </property>
                       </widget>
                      </item>
@@ -516,8 +555,11 @@
                          <pointsize>9</pointsize>
                         </font>
                        </property>
+                       <property name="maxLength">
+                        <number>63</number>
+                       </property>
                        <property name="placeholderText">
-                        <string>ادخل اسم العميل الذي سيتم تحويل له المبلغ</string>
+                        <string>ادخل اسم العميل لا يقل عن 10 احرف</string>
                        </property>
                       </widget>
                      </item>
@@ -567,7 +609,7 @@
                     <number>30</number>
                    </attribute>
                    <attribute name="horizontalHeaderDefaultSectionSize">
-                    <number>350</number>
+                    <number>300</number>
                    </attribute>
                    <attribute name="horizontalHeaderHighlightSections">
                     <bool>true</bool>
@@ -623,7 +665,7 @@
                    </column>
                    <column>
                     <property name="text">
-                     <string>اي تعليق</string>
+                     <string>كود البنك</string>
                     </property>
                     <property name="font">
                      <font>
@@ -665,6 +707,12 @@
                   <property name="enabled">
                    <bool>true</bool>
                   </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>35</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <family>Cairo</family>
@@ -690,667 +738,710 @@
              <attribute name="title">
               <string>مرحلة رفع البيانات</string>
              </attribute>
-             <layout class="QGridLayout" name="gridLayout_15">
+             <layout class="QGridLayout" name="gridLayout_14">
               <item row="0" column="0">
-               <layout class="QVBoxLayout" name="verticalLayout_19" stretch="0,10">
+               <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="10,0">
                 <item>
-                 <widget class="QLabel" name="label">
-                  <property name="font">
-                   <font>
-                    <family>Cairo</family>
-                    <pointsize>9</pointsize>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">color:red</string>
-                  </property>
-                  <property name="text">
-                   <string>هذه الخاصيه لا تعمل هنا بل اضغط علي F9 لفتح الموقع في متصفح خارجي</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignmentFlag::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="5,0">
+                 <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1">
                   <item>
                    <widget class="QGroupBox" name="groupBox_10">
                     <property name="title">
                      <string>موقع البنك</string>
                     </property>
-                    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0">
+                    <layout class="QGridLayout" name="gridLayout_3">
                      <item row="0" column="0">
-                      <widget class="QWebEngineView" name="widgetWebPage" native="true">
-                       <property name="layoutDirection">
-                        <enum>Qt::LayoutDirection::RightToLeft</enum>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="0">
-                      <widget class="QLabel" name="labelWebsiteLoadPrpgress">
-                       <property name="font">
-                        <font>
-                         <family>Cairo</family>
-                         <pointsize>12</pointsize>
-                         <bold>true</bold>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>جاري التحميل .. انظر قليلا</string>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignmentFlag::AlignCenter</set>
-                       </property>
-                      </widget>
+                      <layout class="QVBoxLayout" name="verticalLayout_14" stretch="0,1,1">
+                       <item>
+                        <widget class="QLabel" name="label">
+                         <property name="font">
+                          <font>
+                           <family>Cairo</family>
+                           <pointsize>9</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">color:yellow</string>
+                         </property>
+                         <property name="text">
+                          <string>هذه خاصية دمج الموقع في البرنامج، وهي تحت الاختبار، لذا ان حدث خطأ اضغط علي F9 للعمل بشكل مستقل</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignmentFlag::AlignCenter</set>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QWebEngineView" name="widgetWebPage" native="true">
+                         <property name="layoutDirection">
+                          <enum>Qt::LayoutDirection::RightToLeft</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="labelWebsiteLoadPrpgress">
+                         <property name="font">
+                          <font>
+                           <family>Cairo</family>
+                           <pointsize>12</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">color:yellow</string>
+                         </property>
+                         <property name="text">
+                          <string>جاري التحميل .. انظر قليلا</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignmentFlag::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </item>
                     </layout>
                    </widget>
                   </item>
-                  <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_17" stretch="1,0">
-                    <item>
-                     <widget class="QGroupBox" name="groupBox_12">
-                      <property name="title">
-                       <string>بيانات افتراضيه - هذه البيانات لمساعدتك علي تذكرها</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                      <layout class="QGridLayout" name="gridLayout">
-                       <item row="0" column="0">
-                        <layout class="QVBoxLayout" name="verticalLayout_13" stretch="10,0,0">
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QGroupBox" name="groupBox_12">
+                  <property name="title">
+                   <string>بيانات افتراضيه - هذه البيانات لمساعدتك علي تذكرها</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout">
+                   <item row="2" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_8">
+                     <item>
+                      <widget class="QRadioButton" name="radioButtonActivateAutoLogin">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="layoutDirection">
+                        <enum>Qt::LayoutDirection::RightToLeft</enum>
+                       </property>
+                       <property name="text">
+                        <string>تشغيل خاصية الدخول الالي</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_8">
+                       <property name="orientation">
+                        <enum>Qt::Orientation::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QRadioButton" name="radioButtonActivateAutoUpload">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="layoutDirection">
+                        <enum>Qt::LayoutDirection::RightToLeft</enum>
+                       </property>
+                       <property name="text">
+                        <string>تشغيل خاصية الرفع الالي</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="Line" name="line_2">
+                     <property name="orientation">
+                      <enum>Qt::Orientation::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <layout class="QVBoxLayout" name="verticalLayout_13" stretch="10,0,0">
+                     <item>
+                      <widget class="QLabel" name="label_14">
+                       <property name="contextMenuPolicy">
+                        <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+                       </property>
+                       <property name="text">
+                        <string>هذه البيانات لمساعدتك فقط علي سرعة تسجيل الدخول، ولست مضطرا علي الاطلاق الي اسخدامها. لنفرض مثلا انك تريد تسجيل الدخول الي الموقع: فأنت تحتاج الي اسم المستخدم، يتكون من 16 رقم، وكلمة المرور. فهل من المعقول انني في كل مرة اكتب اسم المستخدم بدون ان تكون هناك وسيلة لادخاله بضغطة زر؟ بالطبع لا. لذا جعلنا لك تلك الخانات بالاسفل لتسهيل ذلك.</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignTop</set>
+                       </property>
+                       <property name="wordWrap">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="Line" name="line">
+                       <property name="orientation">
+                        <enum>Qt::Orientation::Horizontal</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_7">
+                       <property name="spacing">
+                        <number>6</number>
+                       </property>
+                       <property name="sizeConstraint">
+                        <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
+                       </property>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_12">
+                         <property name="spacing">
+                          <number>12</number>
+                         </property>
                          <item>
-                          <widget class="QLabel" name="label_14">
-                           <property name="contextMenuPolicy">
-                            <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+                          <widget class="QLabel" name="label_19">
+                           <property name="text">
+                            <string>اسم المستخدم</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_12">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_18">
+                           <property name="frameShape">
+                            <enum>QFrame::Shape::NoFrame</enum>
                            </property>
                            <property name="text">
-                            <string>هذه البيانات لمساعدتك فقط علي سرعة تسجيل الدخول، ولست مضطرا علي الاطلاق الي اسخدامها. لنفرض مثلا انك تريد تسجيل الدخول الي الموقع: فأنت تحتاج الي اسم المستخدم، يتكون من 16 رقم، وكلمة المرور. فهل من المعقول انني في كل مرة اكتب اسم المستخدم بدون ان تكون هناك وسيلة لادخاله بضغطة زر؟ بالطبع لا. لذا جعلنا لك تلك الخانات بالاسفل لتسهيل ذلك.</string>
+                            <string>كلمة السر</string>
+                           </property>
+                           <property name="scaledContents">
+                            <bool>false</bool>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_13">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_20">
+                           <property name="text">
+                            <string>رقم حساب افتراضي</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_14">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_21">
+                           <property name="text">
+                            <string>كود بنك افتراضي</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_15">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_22">
+                           <property name="text">
+                            <string>اسم عميل افتراضي</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_16">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_6">
+                           <property name="font">
+                            <font>
+                             <family>Cairo</family>
+                             <pointsize>9</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>ملف الاكسل</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_15">
+                         <item>
+                          <widget class="QLineEdit" name="lineEditUsername">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>32</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="frame">
+                            <bool>false</bool>
                            </property>
                            <property name="alignment">
-                            <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignTop</set>
+                            <set>Qt::AlignmentFlag::AlignCenter</set>
                            </property>
-                           <property name="wordWrap">
+                           <property name="placeholderText">
+                            <string>ادخل اسم مستخدم افتراضي</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="lineEditPassword">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>32</height>
+                            </size>
+                           </property>
+                           <property name="inputMask">
+                            <string/>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="maxLength">
+                            <number>32767</number>
+                           </property>
+                           <property name="frame">
+                            <bool>false</bool>
+                           </property>
+                           <property name="echoMode">
+                            <enum>QLineEdit::EchoMode::Password</enum>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                           </property>
+                           <property name="placeholderText">
+                            <string>ادخل كلمة سر افتراضيه</string>
+                           </property>
+                           <property name="cursorMoveStyle">
+                            <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
+                           </property>
+                           <property name="clearButtonEnabled">
+                            <bool>false</bool>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_3">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="lineEditDefaultAccountNumber">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>32</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="frame">
+                            <bool>false</bool>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                           </property>
+                           <property name="placeholderText">
+                            <string>ادخل رقم حساب افتراضي</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_4">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="lineEditDefaultBankCode">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>32</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="frame">
+                            <bool>false</bool>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                           </property>
+                           <property name="placeholderText">
+                            <string>ادخل كود بنك افتراضي</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_5">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="lineEditDefaultCustomerName">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>32</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="frame">
+                            <bool>false</bool>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                           </property>
+                           <property name="placeholderText">
+                            <string>ادخل اسم عميل افتراضي</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_6">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="lineEditXLSXPath">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>35</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Cairo</family>
+                             <pointsize>9</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="frame">
+                            <bool>false</bool>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                           </property>
+                           <property name="readOnly">
                             <bool>true</bool>
                            </property>
+                           <property name="placeholderText">
+                            <string>انتظر مسار ملف الاكسل</string>
+                           </property>
+                           <property name="cursorMoveStyle">
+                            <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_16">
+                         <item>
+                          <widget class="QPushButton" name="pushButtonCopyUsername">
+                           <property name="font">
+                            <font>
+                             <family>Cairo</family>
+                             <pointsize>9</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>نسخ</string>
+                           </property>
+                           <property name="icon">
+                            <iconset theme="edit-copy"/>
+                           </property>
                           </widget>
                          </item>
                          <item>
-                          <widget class="Line" name="line">
+                          <spacer name="verticalSpacer_7">
                            <property name="orientation">
-                            <enum>Qt::Orientation::Horizontal</enum>
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButtonCopyPassword">
+                           <property name="font">
+                            <font>
+                             <family>Cairo</family>
+                             <pointsize>9</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>نسخ</string>
+                           </property>
+                           <property name="icon">
+                            <iconset theme="edit-copy"/>
                            </property>
                           </widget>
                          </item>
                          <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_7">
-                           <property name="spacing">
-                            <number>6</number>
+                          <spacer name="verticalSpacer_8">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
                            </property>
-                           <property name="sizeConstraint">
-                            <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
                            </property>
-                           <item>
-                            <layout class="QVBoxLayout" name="verticalLayout_12">
-                             <property name="spacing">
-                              <number>12</number>
-                             </property>
-                             <item>
-                              <widget class="QLabel" name="label_19">
-                               <property name="text">
-                                <string>اسم المستخدم</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_12">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_18">
-                               <property name="frameShape">
-                                <enum>QFrame::Shape::NoFrame</enum>
-                               </property>
-                               <property name="text">
-                                <string>كلمة السر</string>
-                               </property>
-                               <property name="scaledContents">
-                                <bool>false</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_13">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_20">
-                               <property name="text">
-                                <string>رقم الحساب الافتراضي</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_14">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_21">
-                               <property name="text">
-                                <string>كود بنك افتراضي</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_15">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_22">
-                               <property name="text">
-                                <string>اسم عميل افتراضي</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_16">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_6">
-                               <property name="font">
-                                <font>
-                                 <family>Cairo</family>
-                                 <pointsize>9</pointsize>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>ملف الاكسل</string>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                           <item>
-                            <layout class="QVBoxLayout" name="verticalLayout_15">
-                             <item>
-                              <widget class="QLineEdit" name="lineEditUsername">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>32</height>
-                                </size>
-                               </property>
-                               <property name="text">
-                                <string/>
-                               </property>
-                               <property name="frame">
-                                <bool>false</bool>
-                               </property>
-                               <property name="alignment">
-                                <set>Qt::AlignmentFlag::AlignCenter</set>
-                               </property>
-                               <property name="placeholderText">
-                                <string>ادخل اسم المستخدم</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLineEdit" name="lineEditPassword">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>32</height>
-                                </size>
-                               </property>
-                               <property name="inputMask">
-                                <string/>
-                               </property>
-                               <property name="text">
-                                <string/>
-                               </property>
-                               <property name="maxLength">
-                                <number>32767</number>
-                               </property>
-                               <property name="frame">
-                                <bool>false</bool>
-                               </property>
-                               <property name="echoMode">
-                                <enum>QLineEdit::EchoMode::Password</enum>
-                               </property>
-                               <property name="alignment">
-                                <set>Qt::AlignmentFlag::AlignCenter</set>
-                               </property>
-                               <property name="placeholderText">
-                                <string>ادخل كلمة السر</string>
-                               </property>
-                               <property name="cursorMoveStyle">
-                                <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
-                               </property>
-                               <property name="clearButtonEnabled">
-                                <bool>false</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_3">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLineEdit" name="lineEditDefaultAccountNumber">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>32</height>
-                                </size>
-                               </property>
-                               <property name="text">
-                                <string/>
-                               </property>
-                               <property name="frame">
-                                <bool>false</bool>
-                               </property>
-                               <property name="alignment">
-                                <set>Qt::AlignmentFlag::AlignCenter</set>
-                               </property>
-                               <property name="placeholderText">
-                                <string>ادخل رقم حساب افتراضي</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_4">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLineEdit" name="lineEditDefaultBankCode">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>32</height>
-                                </size>
-                               </property>
-                               <property name="text">
-                                <string/>
-                               </property>
-                               <property name="frame">
-                                <bool>false</bool>
-                               </property>
-                               <property name="alignment">
-                                <set>Qt::AlignmentFlag::AlignCenter</set>
-                               </property>
-                               <property name="placeholderText">
-                                <string>ادخل كود بنك افتراضي</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_5">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLineEdit" name="lineEditDefaultCustomerName">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>32</height>
-                                </size>
-                               </property>
-                               <property name="text">
-                                <string/>
-                               </property>
-                               <property name="frame">
-                                <bool>false</bool>
-                               </property>
-                               <property name="alignment">
-                                <set>Qt::AlignmentFlag::AlignCenter</set>
-                               </property>
-                               <property name="placeholderText">
-                                <string>ادخل اسم عميل افتراضي</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_6">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QLineEdit" name="lineEditXLSXPath">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>35</height>
-                                </size>
-                               </property>
-                               <property name="font">
-                                <font>
-                                 <family>Cairo</family>
-                                 <pointsize>9</pointsize>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="frame">
-                                <bool>false</bool>
-                               </property>
-                               <property name="alignment">
-                                <set>Qt::AlignmentFlag::AlignCenter</set>
-                               </property>
-                               <property name="readOnly">
-                                <bool>true</bool>
-                               </property>
-                               <property name="placeholderText">
-                                <string>في هذا المكان سيتم انشاء المسار الخاص بالملف الجاهز للرفع علي موقع البنك</string>
-                               </property>
-                               <property name="cursorMoveStyle">
-                                <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                           <item>
-                            <layout class="QVBoxLayout" name="verticalLayout_16">
-                             <item>
-                              <widget class="QPushButton" name="pushButtonCopyUsername">
-                               <property name="font">
-                                <font>
-                                 <family>Cairo</family>
-                                 <pointsize>9</pointsize>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>نسخ</string>
-                               </property>
-                               <property name="icon">
-                                <iconset theme="edit-copy"/>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_7">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="pushButtonCopyPassword">
-                               <property name="font">
-                                <font>
-                                 <family>Cairo</family>
-                                 <pointsize>9</pointsize>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>نسخ</string>
-                               </property>
-                               <property name="icon">
-                                <iconset theme="edit-copy"/>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_8">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="pushButtonCopyAccountNumber">
-                               <property name="font">
-                                <font>
-                                 <family>Cairo</family>
-                                 <pointsize>9</pointsize>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>نسخ</string>
-                               </property>
-                               <property name="icon">
-                                <iconset theme="edit-copy"/>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_9">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="pushButtonCopyBankCode">
-                               <property name="font">
-                                <font>
-                                 <family>Cairo</family>
-                                 <pointsize>9</pointsize>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>نسخ</string>
-                               </property>
-                               <property name="icon">
-                                <iconset theme="edit-copy"/>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_10">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="pushButtonCopyCustomerName">
-                               <property name="font">
-                                <font>
-                                 <family>Cairo</family>
-                                 <pointsize>9</pointsize>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>نسخ</string>
-                               </property>
-                               <property name="icon">
-                                <iconset theme="edit-copy"/>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_11">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="pushButtonCopyPath">
-                               <property name="font">
-                                <font>
-                                 <family>Cairo</family>
-                                 <pointsize>9</pointsize>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>نسخ</string>
-                               </property>
-                               <property name="icon">
-                                <iconset theme="edit-copy"/>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                          </layout>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButtonCopyAccountNumber">
+                           <property name="font">
+                            <font>
+                             <family>Cairo</family>
+                             <pointsize>9</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>نسخ</string>
+                           </property>
+                           <property name="icon">
+                            <iconset theme="edit-copy"/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_9">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButtonCopyBankCode">
+                           <property name="font">
+                            <font>
+                             <family>Cairo</family>
+                             <pointsize>9</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>نسخ</string>
+                           </property>
+                           <property name="icon">
+                            <iconset theme="edit-copy"/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_10">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButtonCopyCustomerName">
+                           <property name="font">
+                            <font>
+                             <family>Cairo</family>
+                             <pointsize>9</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>نسخ</string>
+                           </property>
+                           <property name="icon">
+                            <iconset theme="edit-copy"/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_11">
+                           <property name="orientation">
+                            <enum>Qt::Orientation::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButtonCopyPath">
+                           <property name="font">
+                            <font>
+                             <family>Cairo</family>
+                             <pointsize>9</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>نسخ</string>
+                           </property>
+                           <property name="icon">
+                            <iconset theme="edit-copy"/>
+                           </property>
+                          </widget>
                          </item>
                         </layout>
                        </item>
                       </layout>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_2">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Vertical</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>40</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
                 </item>
                </layout>
               </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="tab">
+            <widget class="QWidget" name="tabQuickParts">
              <attribute name="title">
               <string>مهام سريعه</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_6">
-              <item row="0" column="0">
-               <widget class="QGroupBox" name="groupBox_2">
+              <item row="1" column="0">
+               <widget class="QGroupBox" name="groupBoxAutomationParts">
                 <property name="title">
                  <string>اتمته - هذه العمليه لن تتدخل بها بل سيقوم البرنامج بفعل كل شئ</string>
                 </property>
@@ -1474,15 +1565,18 @@
                   </widget>
                  </item>
                  <item row="0" column="0">
-                  <widget class="QGroupBox" name="groupBox">
+                  <widget class="QGroupBox" name="groupBoxGetReports">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="title">
-                    <string>استحراج تقرير</string>
+                    <string>استخراج تقرير</string>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_7">
                     <item row="0" column="0">
                      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="10,0">
                       <item>
-                       <widget class="QLabel" name="label_2">
+                       <widget class="QLabel" name="labelGetReports">
                         <property name="text">
                          <string>سيقوم البرنامج بشكل اوتوماتيكي بالدخول الي موقع البنك وتسجيل الدخول بشكل تلقائي بناءا علي البيانت الافتراضيه المدخلة من قبل المستخدم، وبعد ذلك يضغط علي عرض التقارير ويختار المدة وكذلك نوع الملف المخرج</string>
                         </property>
@@ -1945,6 +2039,368 @@
                  </item>
                 </layout>
                </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="labelWarningAboutQuickParts">
+                <property name="font">
+                 <font>
+                  <family>Cairo</family>
+                  <pointsize>9</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color:yellow</string>
+                </property>
+                <property name="text">
+                 <string>هذه الخواص لا تعمل حاليا، وهي تحت الاختبار وسيتم تفعيلها حين ننتهي من الاختبار مع النسخة الجديدة باذن الله</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tabShortcuts">
+             <attribute name="title">
+              <string>اختصارات</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_15">
+              <item row="0" column="0">
+               <layout class="QVBoxLayout" name="verticalLayout_17">
+                <item>
+                 <widget class="QLabel" name="label_2">
+                  <property name="text">
+                   <string>اختصارات هامة في تسريع لتحسين تجربة المستخدم</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QTableWidget" name="tableWidget">
+                  <property name="font">
+                   <font>
+                    <family>Cairo</family>
+                    <pointsize>10</pointsize>
+                    <bold>false</bold>
+                    <kerning>true</kerning>
+                   </font>
+                  </property>
+                  <property name="layoutDirection">
+                   <enum>Qt::LayoutDirection::RightToLeft</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContentsOnFirstShow</enum>
+                  </property>
+                  <property name="editTriggers">
+                   <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                  </property>
+                  <property name="tabKeyNavigation">
+                   <bool>false</bool>
+                  </property>
+                  <property name="showDropIndicator" stdset="0">
+                   <bool>false</bool>
+                  </property>
+                  <property name="dragDropOverwriteMode">
+                   <bool>false</bool>
+                  </property>
+                  <property name="alternatingRowColors">
+                   <bool>false</bool>
+                  </property>
+                  <property name="selectionBehavior">
+                   <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+                  </property>
+                  <property name="showGrid">
+                   <bool>true</bool>
+                  </property>
+                  <property name="gridStyle">
+                   <enum>Qt::PenStyle::DotLine</enum>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="rowCount">
+                   <number>20</number>
+                  </property>
+                  <attribute name="horizontalHeaderDefaultSectionSize">
+                   <number>235</number>
+                  </attribute>
+                  <attribute name="horizontalHeaderStretchLastSection">
+                   <bool>true</bool>
+                  </attribute>
+                  <attribute name="verticalHeaderDefaultSectionSize">
+                   <number>50</number>
+                  </attribute>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <column>
+                   <property name="text">
+                    <string>الاختصار</string>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Cairo</family>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>الوصف</string>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Cairo</family>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                  </column>
+                  <item row="0" column="0">
+                   <property name="text">
+                    <string>Ctrl+Tab</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="0" column="1">
+                   <property name="text">
+                    <string>الانتقال الي الصفحة التاليه من اليمين الي اليسار</string>
+                   </property>
+                  </item>
+                  <item row="1" column="0">
+                   <property name="text">
+                    <string>Ctrl+Shift+Tab</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="1" column="1">
+                   <property name="text">
+                    <string>الانتقال الي الصفحة السابقه من اليسار الي اليمين</string>
+                   </property>
+                  </item>
+                  <item row="2" column="0">
+                   <property name="text">
+                    <string>Insert</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="2" column="1">
+                   <property name="text">
+                    <string>اضافة البيانات في المدخلات العلوية الي الجدول السفلي</string>
+                   </property>
+                  </item>
+                  <item row="3" column="0">
+                   <property name="text">
+                    <string>Refresh</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="3" column="1">
+                   <property name="text">
+                    <string>اعادة تحميل التطبيق</string>
+                   </property>
+                  </item>
+                  <item row="4" column="0">
+                   <property name="text">
+                    <string>Delete</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="4" column="1">
+                   <property name="text">
+                    <string>حذف الصف الحالي من الجدول</string>
+                   </property>
+                  </item>
+                  <item row="5" column="0">
+                   <property name="text">
+                    <string>F1</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="5" column="1">
+                   <property name="text">
+                    <string>فتح شاشة `معلومات التطبيق`</string>
+                   </property>
+                  </item>
+                  <item row="6" column="0">
+                   <property name="text">
+                    <string>F2</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="7" column="0">
+                   <property name="text">
+                    <string>F3</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="8" column="0">
+                   <property name="text">
+                    <string>F4</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="9" column="0">
+                   <property name="text">
+                    <string>F5</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="9" column="1">
+                   <property name="text">
+                    <string>اعادة تحميل التطبيق</string>
+                   </property>
+                  </item>
+                  <item row="10" column="0">
+                   <property name="text">
+                    <string>F6</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="10" column="1">
+                   <property name="text">
+                    <string>انشاء معاملة ببيانات افتراضيه - تستخدم من قبل المطور فقط</string>
+                   </property>
+                  </item>
+                  <item row="11" column="0">
+                   <property name="text">
+                    <string>F7</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="12" column="0">
+                   <property name="text">
+                    <string>F8</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="13" column="0">
+                   <property name="text">
+                    <string>F9</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="13" column="1">
+                   <property name="text">
+                    <string>فتح موقع البنك في متصف خارجي</string>
+                   </property>
+                  </item>
+                  <item row="14" column="0">
+                   <property name="text">
+                    <string>F10</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="15" column="0">
+                   <property name="text">
+                    <string>F11</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="15" column="1">
+                   <property name="text">
+                    <string>تكبير وتصغير الشاشة الحاله</string>
+                   </property>
+                  </item>
+                  <item row="16" column="0">
+                   <property name="text">
+                    <string>F12</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="17" column="0">
+                   <property name="text">
+                    <string>Ctrl+P</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="17" column="1">
+                   <property name="text">
+                    <string>اخد لقطة شاشه للبرنامج كما هو الان</string>
+                   </property>
+                  </item>
+                  <item row="18" column="0">
+                   <property name="text">
+                    <string>Esc</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="18" column="1">
+                   <property name="text">
+                    <string>اغلاق اي شاشة فرعيه</string>
+                   </property>
+                  </item>
+                  <item row="19" column="0">
+                   <property name="text">
+                    <string>Ctrl+Number</string>
+                   </property>
+                   <property name="textAlignment">
+                    <set>AlignCenter</set>
+                   </property>
+                  </item>
+                  <item row="19" column="1">
+                   <property name="text">
+                    <string>الانتقال الي التبويب رقم &lt;رقم التبويب&gt;</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
