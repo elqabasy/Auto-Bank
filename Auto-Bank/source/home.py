@@ -1,61 +1,134 @@
-import package
-from PySide6 import QtCore
+# External
 from openpyxl import Workbook
-from database import DATABASE
-from settings import Settings
-from PySide6.QtCore import QUrl
-import pyperclip, os, random, datetime
-from design.py.home import Ui_MainWindowHome
-from PySide6.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem
+from fake_useragent import UserAgent
+import os, io, tempfile, xlsxwriter, pyperclip, os, random, datetime
+
+# My Packages
+from source.database import DATABASE
+from source.settings import Settings
+from source.profile_info import ProfileInfo
+from source.package import NumberScrapping, ShowOtherWindow, TakeScreenShot
+
+
+# PySide6
+from PySide6.QtCore import QUrl, QTimer, Qt
+from PySide6.QtGui import QShortcut, QKeySequence, QFont
+from PySide6.QtWebEngineCore import QWebEngineProfile, QWebEnginePage
 from PySide6.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
+from PySide6.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QGraphicsBlurEffect, QWidget, QLabel, QApplication
+
+
+from design.py.home import Ui_MainWindowHome
 class Home(QMainWindow, Ui_MainWindowHome):
     Message = QMessageBox
-    timer = QtCore.QTimer()
+    timer = QTimer()
     _settings = Settings("Mahros AL-Qabasy", "Auto-Bank")
     _url = "https://digital.banquemisr.com/bmonlinebusiness/customer-login"
     def __init__(self):
         super(Home,self).__init__()
         self.networkManager = QNetworkAccessManager(self)
         self.networkManager.finished.connect(self.onFinished)
+        self._profile = QWebEngineProfile("PROFILE_NAME")
         self.setupUi(self)
-        self.setWindowFlag(QtCore.Qt.WindowType.WindowCloseButtonHint, True)
-        self.widgetWebPage.hide()
+        self.setWindowFlag(Qt.WindowType.WindowCloseButtonHint, True)
 
         self.initView()
         self.initDeafaults()
+        self.initShortcuts()
         self.initEntryInputs()
         self.initButtonsActions()
+        self.initWebEngineSettings()
+        self.initBlureStyle()
+        # self.Generate_V2()
 
+    def initWebEngineSettings(self):
+        self.widgetWebPage.hide()
         self.widgetWebPage.loadStarted.connect(self.on_load_started)
         self.widgetWebPage.loadProgress.connect(self.on_load_progress)
         self.widgetWebPage.loadFinished.connect(self.on_load_finished)
 
+
+        # get random user agent
+        ua = UserAgent()
+        random_user_agent = ua.random
+        self._profile.setHttpUserAgent(random_user_agent)
+        self.widgetWebPage.setPage(QWebEnginePage(self._profile)) # (QWebEngineProfile(self._profile).defaultPage())
+        self._profile.downloadRequested.connect(self.handle_download)
+        # self.widgetWebPage.
+
+
+        # self.widgetWebPage.settings().setAttribute(QWebEngineSettings.WebAttribute., False)
+
+        # THEN load page
         self.widgetWebPage.load(QUrl(self._url))
 
+    def handle_download(self, download_item):
+        self.showSuccess("تم تنزيل الملف في هذا المسار")
+        try:
+            os.startfile(download_item)
+            download_item.accept()
+        except Exception as Error:
+            self.showError(Error)
 
     def on_load_started(self):
+        self.widgetWebPage.hide()
+        self.labelWebsiteLoadPrpgress.show()
         self.labelWebsiteLoadPrpgress.setText("يتم تحميل الموقع الان")
+
     def on_load_progress(self, progress):
+        # 1 2 3 .. 100
+        # print(progress)
         self.labelWebsiteLoadPrpgress.setText(f"جاري التحميل ... {progress}%")
+
     def on_load_finished(self, ok):
         if ok:
             self.labelWebsiteLoadPrpgress.setText("تم التحميل بنجاح")
-            self.labelWebsiteLoadPrpgress.hide()
             self.widgetWebPage.show()
+            self.labelWebsiteLoadPrpgress.hide()
+            # be = QGraphicsBlurEffect(self)
+            # be.setBlurRadius(8)
+            # self.widgetWebPage.setGraphicsEffect(be)
         else:
-            self.labelWebsiteLoadPrpgress.setText("فشل الاتحميل")
+            self.labelWebsiteLoadPrpgress.setText("فشل الاتحميل، اضغط علي تحديث لاعادة تحميل الصفحه")
+
+
+    def auto_login(self):
+        # print(self.widgetWebPage.page().loadFinished)
+        if self.widgetWebPage.page().loadFinished:
+            defaultUsername:str = self.lineEditUsername.text()
+            defaultPassword:str = self.lineEditPassword.text()
+            js_code = f"""
+            var usernameField = document.getElementById('username');
+            var passwordField = document.getElementById('password');
+
+            usernameField.value = '{defaultUsername}';
+            passwordField.value = '{defaultPassword}';
+            """
+            # var loginButton = document.getElementById('loginButton');
+            # loginButton.click();
+            self.widgetWebPage.page().runJavaScript(js_code)
+        else:
+            self.Message.critical(self, "Error - Auto-Login", "اعد تحميل الصفجه مجددا")
+            
 
     def initView(self):
-        self.statusbar.showMessage("جاري تهيئة البرنامج")
+        self.statusBarLabel = QLabel("مستعد")
+        self.statusBarLabel.setFont(QFont("Cairo", 10))
+        self.statusBarLabel.setMargin(15)
+        self.statusbar.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.statusbar.addPermanentWidget(self.statusBarLabel)
+
+
+        self.statusBarLabel.setText("جاري تهيئة البرنامج")
         self.timer.timeout.connect(lambda: self.checkWebsiteStatus())
-        self.timer.timeout.connect(lambda: self.statusbar.showMessage("مستعد"))
+        self.timer.timeout.connect(lambda: self.statusBarLabel.setText("مستعد"))
         
         self.timer.start(3500)
 
-        self.spinBoxTransactionAmount.textChanged.connect(lambda: self.labelMoney.setText(package.NumberScrapping.numberToEgyptionCurrency(self.spinBoxTransactionAmount.value())))
+        self.spinBoxTransactionAmount.textChanged.connect(lambda: self.labelMoney.setText(NumberScrapping.numberToEgyptionCurrency(self.spinBoxTransactionAmount.value())))
 
     def Add(self):
-        comments = "comment"
+        bankName = str(self.comboBoxBankName.currentText()).strip()
         transitionAmount = int(self.spinBoxTransactionAmount.value())
         bankNumber = str(self.comboBoxBankNumber.currentText()).strip()
         creatorName = str(self.lineEditCreatorName.text()).strip().title()
@@ -67,13 +140,14 @@ class Home(QMainWindow, Ui_MainWindowHome):
         if creatorName.strip() != "":
             if creatorAccountNumber.strip() != "" and len(creatorAccountNumber) == 16:
                 if bankNumber.strip() != "" and len(bankNumber) == 11:
-                    pass
+                    # if package
                     # rowCount = self.tableWidgetData.rowCount()
                     self.tableWidgetData.insertRow(row)
                     self.tableWidgetData.setItem(row, 0, QTableWidgetItem(creatorName))
                     self.tableWidgetData.setItem(row, 1, QTableWidgetItem(creatorAccountNumber))
                     self.tableWidgetData.setItem(row, 2, QTableWidgetItem(str(transitionAmount)))
-                    self.tableWidgetData.setItem(row, 3, QTableWidgetItem(bankNumber))
+                    self.tableWidgetData.setItem(row, 3, QTableWidgetItem(bankName))
+                    self.tableWidgetData.setItem(row, 4, QTableWidgetItem(bankNumber))
                 else:
                     self.showError("اسم البنك غير صحيح، تأكد من انك اخترت اسم البنك الصحيح، وأيضا كود البنك يتكون من 11 حرف")
             else:
@@ -81,7 +155,17 @@ class Home(QMainWindow, Ui_MainWindowHome):
         else:
             self.showError("اسم العميل يجب ان يكون صحيح")
 
-               
+
+    def initBlureStyle(self):
+        for child_widget in self.groupBoxAutomationParts.findChildren(QWidget):
+            child_widget:QWidget = child_widget
+            if child_widget.objectName() != "labelWarningAboutQuickParts" and child_widget.objectName() != "groupBoxGetReports" and child_widget.objectName() != "labelGetReports" and child_widget.objectName() != "dateEditReportFrom" and child_widget.objectName() != "dateEditReportTo" and child_widget.objectName() != "pushButtonGetDatedReport":
+                be = QGraphicsBlurEffect(self)
+                be.setBlurRadius(2.5)
+                child_widget.setGraphicsEffect(be)
+
+
+
     def initDeafaults(self):
         # defaults
         # username, password
@@ -167,23 +251,73 @@ class Home(QMainWindow, Ui_MainWindowHome):
         self.lineEditDefaultBankCode.textChanged.connect(lambda: self._settings.save_setting("data/defaultBankCode", self.lineEditDefaultBankCode.text().strip()))
         self.lineEditDefaultAccountNumber.textChanged.connect(lambda: self._settings.save_setting("data/defaultAccountNumber", self.lineEditDefaultAccountNumber.text().strip()))
 
-
-        # animation
-        # icon = QIcon(QIcon.fromTheme(u"edit-paste"))
-        # self.pushButtonCopyPath.clicked.connect(lambda: self.pushButtonCopyPath.setText("تم النسخ"))
-        # self.pushButtonCopyPath.clicked.connect(lambda: self.pushButtonCopyPath.setIcon(icon))
-        
-        # self.pushButtonCopyUsername.clicked.connect(lambda: self.pushButtonCopyUsername.setText("تم النسخ"))
-        # self.pushButtonCopyUsername.clicked.connect(lambda: self.pushButtonCopyUsername.setIcon(icon))
+        # radio buttons
+        self.radioButtonActivateAutoLogin.clicked.connect(self.auto_login)
 
     def initShortcuts(self):
-        # addNewPayment = QShortcut("Ctrl+Shift+I",self).activated.connect(self.Screenshot)
+        # tabWidgetHome - navigation
+        bavigateTabsRight = QShortcut("Ctrl+Tab", self.tabWidgetHome).activated.connect(lambda: self.tabWidgetHome.setCurrentIndex(self.getNextTabIndex(1)))
+        bavigateTabsLeft = QShortcut("Ctrl+Shift+Tab", self.tabWidgetHome).activated.connect(lambda: self.tabWidgetHome.setCurrentIndex(self.getNextTabIndex(-1)))
+
+        # tabData - transactions
+        addTransaction = QShortcut("Insert", self.tabData).activated.connect(self.Add)
+        deleteTransaction = QShortcut(QKeySequence.StandardKey.Delete, self.tabData).activated.connect(self.Delete)
+        clearTransactions = QShortcut(QKeySequence.StandardKey.Refresh, self.tabData).activated.connect(self.refreshApplication)
+        autoTransaction = QShortcut("F6", self.tabData).activated.connect(self.autoTransaction)
+
+        # application - all 
+        openProfileInfo = QShortcut("F1", self).activated.connect(lambda: ShowOtherWindow(self, ProfileInfo))
+        refreshApplication = QShortcut(QKeySequence.StandardKey.Refresh, self).activated.connect(lambda: self.tabWidgetHome.setCurrentIndex(self.getNextTabIndex(-1)))
+        takeScreenShot = QShortcut(QKeySequence.StandardKey.Print, self).activated.connect(lambda: TakeScreenShot(self))
+        # if event.key() == Qt.Key.Key_Insert:
+        #     self.Add()
+        # if event.key() == Qt.Key.Key_Delete:
+        #     self.Delete()
+
+        # if event.key() == Qt.Key.Key_F1:
+        #     self.profile_info_ = ProfileInfo()
+        #     self.profile_info_.show()
+        # if event.key() == Qt.Key.Key_F5:
+        #     self.initView()
+        # if event.key() == Qt.Key.Key_F6:
+        #     self.lineEditCreatorName.setText(self.lineEditDefaultCustomerName.text())
+        #     self.lineEditAccountCreatorAccountNumber.setText(self.lineEditDefaultAccountNumber.text())
+        #     self.spinBoxTransactionAmount.setValue(10)
+        #     self.comboBoxBankName.setFocus()
+        #     self.comboBoxBankName.showPopup()
+        # if event.key() == Qt.Key.Key_F9:
+        #     os.startfile(self._url)
+        # if event.key() == Qt.Key.Key_F11:
+        #     if self.isMaximized():
+        #         self.showNormal()
+        #     else:
+        #         self.showMaximized()
+
         # addNewPayment = QShortcut("Ctrl+Shift+I",self).activated.connect(self.Screenshot)
         # clearWindow = QShortcut("Ctrl+Shift+C",self).activated.connect(self.ClearLoggings)
         # refreshWindow = QShortcut(QKeySequence.StandardKey.Refresh,self).activated.connect(self.initView)
-        pass
 
-    # Functionality
+
+    def getNextTabIndex(self, direction=1):
+        """
+        when:1 
+            return the next tab index 
+        else:
+            return the previus tab index
+        """
+        tabsCount:int = self.tabWidgetHome.count()
+        currentIndex:int = self.tabWidgetHome.currentIndex()
+        if direction == 1:
+            if (tabsCount-1) == currentIndex:
+                return 0
+            else:
+                return currentIndex+1
+        else:
+            if currentIndex == 0:
+                return tabsCount-1
+            else:
+                return currentIndex-1
+        
     def refreshApplication(self):
         self.tableWidgetData.setRowCount(0)
         self.widgetWebPage.load(QUrl(self._url))
@@ -195,7 +329,8 @@ class Home(QMainWindow, Ui_MainWindowHome):
     def openWebEngineTab(self):
         self.tabWidgetHome.setCurrentWidget(self.tabUploadData)
         # self.save_table_to_excel()
-        self.Generate()
+        # self.Generate()
+        self.Generate_V2()
     
     def Delete(self):
         row = self.tableWidgetData.currentRow()
@@ -241,6 +376,67 @@ class Home(QMainWindow, Ui_MainWindowHome):
             return True
         return True
 
+    def Generate_V2(self):
+        # pckages
+        
+        self.tableWidgetData.selectAll()
+        SELECTED = [x for x in self.tableWidgetData.selectionModel().selectedRows()]
+        if len(SELECTED) > 0:
+            # Create an in-memory workbook
+            output = io.BytesIO()
+            workbook = xlsxwriter.Workbook(output)
+            Sheet1 = workbook.add_worksheet("Sheet1")
+
+            headerData = ["NationalID", "CreditorName", "CreditorAccountNumber", "CreditorBank", "CreditorBankBranch", "TransactionAmount", "Comments", "Email", "Mobile"]
+            for index, value in enumerate(headerData):
+                # Sheet1.cell(row=1, column=index+1).value = value
+                Sheet1.write(0, index, value)
+
+            # set data
+            ROWS = int(self.tableWidgetData.rowCount()) - 1
+            fileRow = 1
+            for SELECTED_Index in SELECTED:
+                if SELECTED_Index.row() <= ROWS:
+                    creditorNameColumn =  0
+                    creditorAccountNumberColumn =  1
+                    creditorBankColumn =  4
+                    transactionAmountColumn =  2
+            #         commentsColumn =  4
+
+                    creditorName = self.tableWidgetData.model().index(SELECTED_Index.row(), creditorNameColumn).data()
+                    creditorAccountNumber = self.tableWidgetData.model().index(SELECTED_Index.row(), creditorAccountNumberColumn).data()
+                    creditorBank = self.tableWidgetData.model().index(SELECTED_Index.row(), creditorBankColumn).data()
+                    transactionAmount = self.tableWidgetData.model().index(SELECTED_Index.row(), transactionAmountColumn).data()
+                    # comments = self.tableWidgetData.model().index(SELECTED_Index.row(), commentsColumn).data()
+
+            #         # creditorName
+                    Sheet1.write(fileRow, 2-1, creditorName)
+                    Sheet1.write(fileRow, 4-1, creditorBank)
+                    Sheet1.write(fileRow, 3-1, creditorAccountNumber)
+                    Sheet1.write(fileRow, 6-1, int(transactionAmount))
+                    Sheet1.write(fileRow, 7-1, "comment")
+                    fileRow += 1
+
+            # Close the workbook
+            workbook.close()
+
+            # Get the in-memory XLSX data
+            xlsx_data = output.getvalue()
+            
+            # Create a temporary file that will be deleted after use
+            with tempfile.NamedTemporaryFile(delete=False, suffix='.xlsx') as tmpfile:
+                tmpfile.write(xlsx_data)
+                tmpfile.flush()
+
+                # Get the file path of the temporary file
+                temp_file_path = tmpfile.name
+                self.lineEditXLSXPath.setText(str(temp_file_path))
+                # print(temp_file_path)
+                # os.startfile(temp_file_path)
+        else:
+            self.tabWidgetHome.setCurrentWidget(self.tabData)
+            self.showError("لم يتم اضافة اي معاملات، ادخل معاملة واحدة علي الاقل")
+
     def Generate(self):
         self.tableWidgetData.selectAll()
         SELECTED = [x for x in self.tableWidgetData.selectionModel().selectedRows()]
@@ -253,8 +449,6 @@ class Home(QMainWindow, Ui_MainWindowHome):
                 Sheet1 = WorkBook.active
                 Sheet1.title = "Sheet1"
                 # header data
-                # headerData = ["CreditorName", "CreditorAccountNumber", "CreditorBank", "TransactionAmount", "Comments"]
-                # headerData = ["NationalID", "CreditorName", "CreditorAccountNumber", "CreditorBank", "TransactionAmount", "Comments"]
                 headerData = ["NationalID", "CreditorName", "CreditorAccountNumber", "CreditorBank", "CreditorBankBranch", "TransactionAmount", "Comments", "Email", "Mobile"]
                 for index, value in enumerate(headerData):
                     Sheet1.cell(row=1, column=index+1).value = value
@@ -290,9 +484,6 @@ class Home(QMainWindow, Ui_MainWindowHome):
                 pyperclip.copy(self.lineEditUsername.text())
                 if os.path.isfile(filePath):
                     os.startfile(filePath)
-                    # Result = self.Message.information(self, "Success!", "{TYPE} Generated successfully.,\n path:\n '{filePath}' {TYPE}, \nDo you want to copy source?".format(TYPE=TYPE, filePath=filePath), buttons=self.Message.Yes|self.Message.No|self.Message.Ok, defaultButton=self.Message.Yes)
-                    # if Result == self.Message.Yes:
-                        # Result = self.Message.information(self, "Coping Source...", "Source File Copied successfully.", buttons=self.Message.Ok, defaultButton=self.Message.Ok)
         else:
             self.tabWidgetHome.setCurrentWidget(self.tabData)
             self.showError("لم يتم اضافة اي معاملات، ادخل معاملة علي الاقل")
@@ -304,24 +495,27 @@ class Home(QMainWindow, Ui_MainWindowHome):
         QMessageBox.information(self, "نجاح", message)
 
     def closeEvent(self, event):
-        if os.path.exists(self.lineEditXLSXPath.text()):
-            os.remove(self.lineEditXLSXPath.text())
-        event.accept()
+        pass
+    
+    def autoTransaction(self):
+        self.lineEditCreatorName.setText(self.lineEditDefaultCustomerName.text())
+        self.lineEditAccountCreatorAccountNumber.setText(self.lineEditDefaultAccountNumber.text())
+        self.spinBoxTransactionAmount.setValue(10)
+        self.comboBoxBankName.setFocus()
+        self.comboBoxBankName.showPopup()
+
+    # def showErrorMessage(self, text:str, title:str="Error", informative_text:str=""):
+    #     Message = QMessageBox(QMessageBox.Icon.Critical, title, text, QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Yes)
+    #     Message.setInformativeText(informative_text)
+    #     Message.exec_()
+    #     if Message == QMessageBox.StandardButton.Yes:
+    #         pyperclip.copy(str())
 
     def keyPressEvent(self, event): 
-        self.statusbar.showMessage("KeyEvent, {key}".format(key=event.modifiers().name)) 
-        if event.key() == QtCore.Qt.Key.Key_Escape:
-            pass
-        if event.key() == QtCore.Qt.Key.Key_F11:
+        if event.key() == Qt.Key.Key_F9:
+            os.startfile(self._url)
+        if event.key() == Qt.Key.Key_F11:
             if self.isMaximized():
                 self.showNormal()
             else:
                 self.showMaximized()
-        if event.key() == QtCore.Qt.Key.Key_F5:
-            self.initView()
-        if event.key() == QtCore.Qt.Key.Key_Insert:
-            self.Add()
-        if event.key() == QtCore.Qt.Key.Key_Delete:
-            self.Delete()
-        if event.key() == QtCore.Qt.Key.Key_F9:
-            os.startfile(self._url)

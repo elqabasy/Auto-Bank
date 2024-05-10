@@ -19,7 +19,7 @@ VSVersionInfo(
             StringStruct(u'FileDescription', u'Auto-Bank Description'),
             StringStruct(u'FileVersion', u'1.0.0.0'),
             StringStruct(u'InternalName', u'Auto-Bank Internal Name'),
-            StringStruct(u'LegalCopyright', u'Copyright © Mahros AL-Qabasy 2023'),
+            StringStruct(u'LegalCopyright', u'Copyright © Mahros AL-Qabasy 2024'),
             StringStruct(u'OriginalFilename', u'Auto-Bank.exe'),
             StringStruct(u'ProductName', u'Auto-Bank'),
             StringStruct(u'ProductVersion', u'1.0.0.0')

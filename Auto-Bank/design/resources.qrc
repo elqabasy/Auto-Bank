@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>icons/.png/icons8-info-96.png</file>
     <file>icons/.ico/app.ico</file>
     <file>icons/.ico/update.ico</file>
   </qresource>

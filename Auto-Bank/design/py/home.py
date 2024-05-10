@@ -16,13 +16,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtWidgets import (QAbstractItemView, QAbstractSpinBox, QApplication, QComboBox,
-    QDateEdit, QDateTimeEdit, QFrame, QGridLayout,
-    QGroupBox, QHBoxLayout, QHeaderView, QLabel,
-    QLayout, QLineEdit, QMainWindow, QPushButton,
-    QRadioButton, QSizePolicy, QSpacerItem, QSpinBox,
-    QSplitter, QStackedWidget, QStatusBar, QTabWidget,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QAbstractSpinBox, QApplication,
+    QComboBox, QDateEdit, QDateTimeEdit, QFrame,
+    QGridLayout, QGroupBox, QHBoxLayout, QHeaderView,
+    QLabel, QLayout, QLineEdit, QMainWindow,
+    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
+    QSpinBox, QSplitter, QStackedWidget, QStatusBar,
+    QTabWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_MainWindowHome(object):
@@ -39,15 +40,18 @@ class Ui_MainWindowHome(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_10 = QGridLayout(self.centralwidget)
         self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.gridLayout_10.setContentsMargins(-1, 0, -1, 0)
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(9, 9, 9, 0)
+        self.horizontalLayout.setContentsMargins(9, 0, 9, 0)
         self.radioButtonAccountStatus = QRadioButton(self.centralwidget)
         self.radioButtonAccountStatus.setObjectName(u"radioButtonAccountStatus")
         self.radioButtonAccountStatus.setEnabled(True)
+        self.radioButtonAccountStatus.setMinimumSize(QSize(73, 0))
+        self.radioButtonAccountStatus.setMaximumSize(QSize(73, 16777215))
         font = QFont()
         font.setFamilies([u"Cairo"])
         font.setPointSize(9)
@@ -78,6 +82,7 @@ class Ui_MainWindowHome(object):
 
         self.pushButtonRefresh = QPushButton(self.centralwidget)
         self.pushButtonRefresh.setObjectName(u"pushButtonRefresh")
+        self.pushButtonRefresh.setMinimumSize(QSize(0, 35))
         font2 = QFont()
         font2.setFamilies([u"Cairo"])
         font2.setPointSize(9)
@@ -109,7 +114,9 @@ class Ui_MainWindowHome(object):
         self.tabWidgetHome.setEnabled(True)
         self.tabWidgetHome.setFont(font3)
         self.tabWidgetHome.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+        self.tabWidgetHome.setTabPosition(QTabWidget.TabPosition.North)
         self.tabWidgetHome.setDocumentMode(False)
+        self.tabWidgetHome.setMovable(False)
         self.tabWidgetHome.setTabBarAutoHide(False)
         self.tabData = QWidget()
         self.tabData.setObjectName(u"tabData")
@@ -221,6 +228,7 @@ class Ui_MainWindowHome(object):
         self.comboBoxBankNumber.setMaximumSize(QSize(108, 16777215))
         self.comboBoxBankNumber.setFont(font3)
         self.comboBoxBankNumber.setEditable(False)
+        self.comboBoxBankNumber.setMinimumContentsLength(11)
 
         self.horizontalLayout_13.addWidget(self.comboBoxBankNumber)
 
@@ -233,6 +241,7 @@ class Ui_MainWindowHome(object):
         self.comboBoxBankName.setSizePolicy(sizePolicy2)
         self.comboBoxBankName.setMinimumSize(QSize(0, 35))
         self.comboBoxBankName.setFont(font3)
+        self.comboBoxBankName.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.comboBoxBankName.setEditable(False)
 
         self.horizontalLayout_13.addWidget(self.comboBoxBankName)
@@ -249,6 +258,7 @@ class Ui_MainWindowHome(object):
         self.lineEditAccountCreatorAccountNumber.setSizePolicy(sizePolicy1)
         self.lineEditAccountCreatorAccountNumber.setMinimumSize(QSize(0, 35))
         self.lineEditAccountCreatorAccountNumber.setFont(font3)
+        self.lineEditAccountCreatorAccountNumber.setMaxLength(16)
 
         self.horizontalLayout_12.addWidget(self.lineEditAccountCreatorAccountNumber)
 
@@ -258,6 +268,7 @@ class Ui_MainWindowHome(object):
         self.lineEditCreatorName.setSizePolicy(sizePolicy1)
         self.lineEditCreatorName.setMinimumSize(QSize(0, 35))
         self.lineEditCreatorName.setFont(font3)
+        self.lineEditCreatorName.setMaxLength(63)
 
         self.horizontalLayout_12.addWidget(self.lineEditCreatorName)
 
@@ -301,7 +312,7 @@ class Ui_MainWindowHome(object):
         self.tableWidgetData.setRowCount(0)
         self.tableWidgetData.horizontalHeader().setCascadingSectionResizes(True)
         self.tableWidgetData.horizontalHeader().setMinimumSectionSize(30)
-        self.tableWidgetData.horizontalHeader().setDefaultSectionSize(350)
+        self.tableWidgetData.horizontalHeader().setDefaultSectionSize(300)
         self.tableWidgetData.horizontalHeader().setHighlightSections(True)
         self.tableWidgetData.horizontalHeader().setProperty("showSortIndicator", False)
         self.tableWidgetData.horizontalHeader().setStretchLastSection(True)
@@ -322,6 +333,7 @@ class Ui_MainWindowHome(object):
         self.pushButtonNextLevel = QPushButton(self.tabData)
         self.pushButtonNextLevel.setObjectName(u"pushButtonNextLevel")
         self.pushButtonNextLevel.setEnabled(True)
+        self.pushButtonNextLevel.setMinimumSize(QSize(0, 35))
         self.pushButtonNextLevel.setFont(font3)
         self.pushButtonNextLevel.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         icon4 = QIcon(QIcon.fromTheme(u"go-next"))
@@ -335,29 +347,32 @@ class Ui_MainWindowHome(object):
         self.tabWidgetHome.addTab(self.tabData, "")
         self.tabUploadData = QWidget()
         self.tabUploadData.setObjectName(u"tabUploadData")
-        self.gridLayout_15 = QGridLayout(self.tabUploadData)
-        self.gridLayout_15.setObjectName(u"gridLayout_15")
-        self.verticalLayout_19 = QVBoxLayout()
-        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
-        self.label = QLabel(self.tabUploadData)
-        self.label.setObjectName(u"label")
-        self.label.setFont(font4)
-        self.label.setStyleSheet(u"color:red")
-        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_19.addWidget(self.label)
-
+        self.gridLayout_14 = QGridLayout(self.tabUploadData)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
         self.horizontalLayout_10 = QHBoxLayout()
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.verticalLayout_6 = QVBoxLayout()
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.groupBox_10 = QGroupBox(self.tabUploadData)
         self.groupBox_10.setObjectName(u"groupBox_10")
         self.gridLayout_3 = QGridLayout(self.groupBox_10)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.verticalLayout_14 = QVBoxLayout()
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.label = QLabel(self.groupBox_10)
+        self.label.setObjectName(u"label")
+        self.label.setFont(font4)
+        self.label.setStyleSheet(u"color:yellow")
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label.setWordWrap(True)
+
+        self.verticalLayout_14.addWidget(self.label)
+
         self.widgetWebPage = QWebEngineView(self.groupBox_10)
         self.widgetWebPage.setObjectName(u"widgetWebPage")
         self.widgetWebPage.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
 
-        self.gridLayout_3.addWidget(self.widgetWebPage, 0, 0, 1, 1)
+        self.verticalLayout_14.addWidget(self.widgetWebPage)
 
         self.labelWebsiteLoadPrpgress = QLabel(self.groupBox_10)
         self.labelWebsiteLoadPrpgress.setObjectName(u"labelWebsiteLoadPrpgress")
@@ -366,20 +381,58 @@ class Ui_MainWindowHome(object):
         font6.setPointSize(12)
         font6.setBold(True)
         self.labelWebsiteLoadPrpgress.setFont(font6)
+        self.labelWebsiteLoadPrpgress.setStyleSheet(u"color:yellow")
         self.labelWebsiteLoadPrpgress.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.gridLayout_3.addWidget(self.labelWebsiteLoadPrpgress, 1, 0, 1, 1)
+        self.verticalLayout_14.addWidget(self.labelWebsiteLoadPrpgress)
+
+        self.verticalLayout_14.setStretch(1, 1)
+        self.verticalLayout_14.setStretch(2, 1)
+
+        self.gridLayout_3.addLayout(self.verticalLayout_14, 0, 0, 1, 1)
 
 
-        self.horizontalLayout_10.addWidget(self.groupBox_10)
+        self.verticalLayout_6.addWidget(self.groupBox_10)
 
-        self.verticalLayout_17 = QVBoxLayout()
-        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
+        self.verticalLayout_6.setStretch(0, 1)
+
+        self.horizontalLayout_10.addLayout(self.verticalLayout_6)
+
         self.groupBox_12 = QGroupBox(self.tabUploadData)
         self.groupBox_12.setObjectName(u"groupBox_12")
         self.groupBox_12.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout = QGridLayout(self.groupBox_12)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.radioButtonActivateAutoLogin = QRadioButton(self.groupBox_12)
+        self.radioButtonActivateAutoLogin.setObjectName(u"radioButtonActivateAutoLogin")
+        self.radioButtonActivateAutoLogin.setEnabled(False)
+        self.radioButtonActivateAutoLogin.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+
+        self.horizontalLayout_8.addWidget(self.radioButtonActivateAutoLogin)
+
+        self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_8)
+
+        self.radioButtonActivateAutoUpload = QRadioButton(self.groupBox_12)
+        self.radioButtonActivateAutoUpload.setObjectName(u"radioButtonActivateAutoUpload")
+        self.radioButtonActivateAutoUpload.setEnabled(False)
+        self.radioButtonActivateAutoUpload.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+
+        self.horizontalLayout_8.addWidget(self.radioButtonActivateAutoUpload)
+
+
+        self.gridLayout.addLayout(self.horizontalLayout_8, 2, 0, 1, 1)
+
+        self.line_2 = QFrame(self.groupBox_12)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.gridLayout.addWidget(self.line_2, 1, 0, 1, 1)
+
         self.verticalLayout_13 = QVBoxLayout()
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.label_14 = QLabel(self.groupBox_12)
@@ -616,34 +669,22 @@ class Ui_MainWindowHome(object):
         self.gridLayout.addLayout(self.verticalLayout_13, 0, 0, 1, 1)
 
 
-        self.verticalLayout_17.addWidget(self.groupBox_12)
+        self.horizontalLayout_10.addWidget(self.groupBox_12)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.horizontalLayout_10.setStretch(0, 10)
 
-        self.verticalLayout_17.addItem(self.verticalSpacer_2)
-
-        self.verticalLayout_17.setStretch(0, 1)
-
-        self.horizontalLayout_10.addLayout(self.verticalLayout_17)
-
-        self.horizontalLayout_10.setStretch(0, 5)
-
-        self.verticalLayout_19.addLayout(self.horizontalLayout_10)
-
-        self.verticalLayout_19.setStretch(1, 10)
-
-        self.gridLayout_15.addLayout(self.verticalLayout_19, 0, 0, 1, 1)
+        self.gridLayout_14.addLayout(self.horizontalLayout_10, 0, 0, 1, 1)
 
         self.tabWidgetHome.addTab(self.tabUploadData, "")
-        self.tab = QWidget()
-        self.tab.setObjectName(u"tab")
-        self.gridLayout_6 = QGridLayout(self.tab)
+        self.tabQuickParts = QWidget()
+        self.tabQuickParts.setObjectName(u"tabQuickParts")
+        self.gridLayout_6 = QGridLayout(self.tabQuickParts)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.groupBox_2 = QGroupBox(self.tab)
-        self.groupBox_2.setObjectName(u"groupBox_2")
-        self.gridLayout_5 = QGridLayout(self.groupBox_2)
+        self.groupBoxAutomationParts = QGroupBox(self.tabQuickParts)
+        self.groupBoxAutomationParts.setObjectName(u"groupBoxAutomationParts")
+        self.gridLayout_5 = QGridLayout(self.groupBoxAutomationParts)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.groupBox_8 = QGroupBox(self.groupBox_2)
+        self.groupBox_8 = QGroupBox(self.groupBoxAutomationParts)
         self.groupBox_8.setObjectName(u"groupBox_8")
         self.groupBox_8.setEnabled(False)
         self.gridLayout_13 = QGridLayout(self.groupBox_8)
@@ -679,7 +720,7 @@ class Ui_MainWindowHome(object):
 
         self.gridLayout_5.addWidget(self.groupBox_8, 1, 2, 1, 1)
 
-        self.groupBox_9 = QGroupBox(self.groupBox_2)
+        self.groupBox_9 = QGroupBox(self.groupBoxAutomationParts)
         self.groupBox_9.setObjectName(u"groupBox_9")
         self.groupBox_9.setEnabled(False)
         self.gridLayout_18 = QGridLayout(self.groupBox_9)
@@ -715,22 +756,23 @@ class Ui_MainWindowHome(object):
 
         self.gridLayout_5.addWidget(self.groupBox_9, 2, 2, 1, 1)
 
-        self.groupBox = QGroupBox(self.groupBox_2)
-        self.groupBox.setObjectName(u"groupBox")
-        self.gridLayout_7 = QGridLayout(self.groupBox)
+        self.groupBoxGetReports = QGroupBox(self.groupBoxAutomationParts)
+        self.groupBoxGetReports.setObjectName(u"groupBoxGetReports")
+        self.groupBoxGetReports.setEnabled(False)
+        self.gridLayout_7 = QGridLayout(self.groupBoxGetReports)
         self.gridLayout_7.setObjectName(u"gridLayout_7")
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.label_2 = QLabel(self.groupBox)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
-        self.label_2.setWordWrap(True)
+        self.labelGetReports = QLabel(self.groupBoxGetReports)
+        self.labelGetReports.setObjectName(u"labelGetReports")
+        self.labelGetReports.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+        self.labelGetReports.setWordWrap(True)
 
-        self.verticalLayout_2.addWidget(self.label_2)
+        self.verticalLayout_2.addWidget(self.labelGetReports)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.dateEditReportFrom = QDateEdit(self.groupBox)
+        self.dateEditReportFrom = QDateEdit(self.groupBoxGetReports)
         self.dateEditReportFrom.setObjectName(u"dateEditReportFrom")
         self.dateEditReportFrom.setMinimumSize(QSize(0, 35))
         self.dateEditReportFrom.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
@@ -742,7 +784,7 @@ class Ui_MainWindowHome(object):
 
         self.horizontalLayout_3.addWidget(self.dateEditReportFrom)
 
-        self.dateEditReportTo = QDateEdit(self.groupBox)
+        self.dateEditReportTo = QDateEdit(self.groupBoxGetReports)
         self.dateEditReportTo.setObjectName(u"dateEditReportTo")
         self.dateEditReportTo.setMinimumSize(QSize(0, 35))
         self.dateEditReportTo.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.UpDownArrows)
@@ -755,7 +797,7 @@ class Ui_MainWindowHome(object):
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_4)
 
-        self.pushButtonGetDatedReport = QPushButton(self.groupBox)
+        self.pushButtonGetDatedReport = QPushButton(self.groupBoxGetReports)
         self.pushButtonGetDatedReport.setObjectName(u"pushButtonGetDatedReport")
         self.pushButtonGetDatedReport.setMinimumSize(QSize(0, 35))
 
@@ -769,9 +811,9 @@ class Ui_MainWindowHome(object):
         self.gridLayout_7.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
 
 
-        self.gridLayout_5.addWidget(self.groupBox, 0, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.groupBoxGetReports, 0, 0, 1, 1)
 
-        self.groupBox_3 = QGroupBox(self.groupBox_2)
+        self.groupBox_3 = QGroupBox(self.groupBoxAutomationParts)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.groupBox_3.setEnabled(False)
         self.gridLayout_8 = QGridLayout(self.groupBox_3)
@@ -807,7 +849,7 @@ class Ui_MainWindowHome(object):
 
         self.gridLayout_5.addWidget(self.groupBox_3, 0, 2, 1, 1)
 
-        self.groupBox_7 = QGroupBox(self.groupBox_2)
+        self.groupBox_7 = QGroupBox(self.groupBoxAutomationParts)
         self.groupBox_7.setObjectName(u"groupBox_7")
         self.groupBox_7.setEnabled(False)
         self.gridLayout_12 = QGridLayout(self.groupBox_7)
@@ -843,7 +885,7 @@ class Ui_MainWindowHome(object):
 
         self.gridLayout_5.addWidget(self.groupBox_7, 1, 0, 1, 1)
 
-        self.groupBox_13 = QGroupBox(self.groupBox_2)
+        self.groupBox_13 = QGroupBox(self.groupBoxAutomationParts)
         self.groupBox_13.setObjectName(u"groupBox_13")
         self.groupBox_13.setEnabled(False)
         self.gridLayout_19 = QGridLayout(self.groupBox_13)
@@ -879,7 +921,7 @@ class Ui_MainWindowHome(object):
 
         self.gridLayout_5.addWidget(self.groupBox_13, 2, 0, 1, 1)
 
-        self.groupBox_14 = QGroupBox(self.groupBox_2)
+        self.groupBox_14 = QGroupBox(self.groupBoxAutomationParts)
         self.groupBox_14.setObjectName(u"groupBox_14")
         self.groupBox_14.setEnabled(False)
         self.gridLayout_20 = QGridLayout(self.groupBox_14)
@@ -915,7 +957,7 @@ class Ui_MainWindowHome(object):
 
         self.gridLayout_5.addWidget(self.groupBox_14, 0, 1, 1, 1)
 
-        self.groupBox_15 = QGroupBox(self.groupBox_2)
+        self.groupBox_15 = QGroupBox(self.groupBoxAutomationParts)
         self.groupBox_15.setObjectName(u"groupBox_15")
         self.groupBox_15.setEnabled(False)
         self.gridLayout_21 = QGridLayout(self.groupBox_15)
@@ -951,7 +993,7 @@ class Ui_MainWindowHome(object):
 
         self.gridLayout_5.addWidget(self.groupBox_15, 1, 1, 1, 1)
 
-        self.groupBox_16 = QGroupBox(self.groupBox_2)
+        self.groupBox_16 = QGroupBox(self.groupBoxAutomationParts)
         self.groupBox_16.setObjectName(u"groupBox_16")
         self.groupBox_16.setEnabled(False)
         self.gridLayout_22 = QGridLayout(self.groupBox_16)
@@ -988,9 +1030,157 @@ class Ui_MainWindowHome(object):
         self.gridLayout_5.addWidget(self.groupBox_16, 2, 1, 1, 1)
 
 
-        self.gridLayout_6.addWidget(self.groupBox_2, 0, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.groupBoxAutomationParts, 1, 0, 1, 1)
 
-        self.tabWidgetHome.addTab(self.tab, "")
+        self.labelWarningAboutQuickParts = QLabel(self.tabQuickParts)
+        self.labelWarningAboutQuickParts.setObjectName(u"labelWarningAboutQuickParts")
+        self.labelWarningAboutQuickParts.setFont(font4)
+        self.labelWarningAboutQuickParts.setStyleSheet(u"color:yellow")
+        self.labelWarningAboutQuickParts.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_6.addWidget(self.labelWarningAboutQuickParts, 0, 0, 1, 1)
+
+        self.tabWidgetHome.addTab(self.tabQuickParts, "")
+        self.tabShortcuts = QWidget()
+        self.tabShortcuts.setObjectName(u"tabShortcuts")
+        self.gridLayout_15 = QGridLayout(self.tabShortcuts)
+        self.gridLayout_15.setObjectName(u"gridLayout_15")
+        self.verticalLayout_17 = QVBoxLayout()
+        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
+        self.label_2 = QLabel(self.tabShortcuts)
+        self.label_2.setObjectName(u"label_2")
+
+        self.verticalLayout_17.addWidget(self.label_2)
+
+        self.tableWidget = QTableWidget(self.tabShortcuts)
+        if (self.tableWidget.columnCount() < 2):
+            self.tableWidget.setColumnCount(2)
+        font7 = QFont()
+        font7.setFamilies([u"Cairo"])
+        font7.setBold(True)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        __qtablewidgetitem5.setFont(font7);
+        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        __qtablewidgetitem6.setFont(font7);
+        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem6)
+        if (self.tableWidget.rowCount() < 20):
+            self.tableWidget.setRowCount(20)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        __qtablewidgetitem7.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(0, 0, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.tableWidget.setItem(0, 1, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        __qtablewidgetitem9.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(1, 0, __qtablewidgetitem9)
+        __qtablewidgetitem10 = QTableWidgetItem()
+        self.tableWidget.setItem(1, 1, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        __qtablewidgetitem11.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(2, 0, __qtablewidgetitem11)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.tableWidget.setItem(2, 1, __qtablewidgetitem12)
+        __qtablewidgetitem13 = QTableWidgetItem()
+        __qtablewidgetitem13.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(3, 0, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        self.tableWidget.setItem(3, 1, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        __qtablewidgetitem15.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(4, 0, __qtablewidgetitem15)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.tableWidget.setItem(4, 1, __qtablewidgetitem16)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        __qtablewidgetitem17.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(5, 0, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.tableWidget.setItem(5, 1, __qtablewidgetitem18)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        __qtablewidgetitem19.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(6, 0, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        __qtablewidgetitem20.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(7, 0, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        __qtablewidgetitem21.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(8, 0, __qtablewidgetitem21)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        __qtablewidgetitem22.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(9, 0, __qtablewidgetitem22)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.tableWidget.setItem(9, 1, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        __qtablewidgetitem24.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(10, 0, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.tableWidget.setItem(10, 1, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        __qtablewidgetitem26.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(11, 0, __qtablewidgetitem26)
+        __qtablewidgetitem27 = QTableWidgetItem()
+        __qtablewidgetitem27.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(12, 0, __qtablewidgetitem27)
+        __qtablewidgetitem28 = QTableWidgetItem()
+        __qtablewidgetitem28.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(13, 0, __qtablewidgetitem28)
+        __qtablewidgetitem29 = QTableWidgetItem()
+        self.tableWidget.setItem(13, 1, __qtablewidgetitem29)
+        __qtablewidgetitem30 = QTableWidgetItem()
+        __qtablewidgetitem30.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(14, 0, __qtablewidgetitem30)
+        __qtablewidgetitem31 = QTableWidgetItem()
+        __qtablewidgetitem31.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(15, 0, __qtablewidgetitem31)
+        __qtablewidgetitem32 = QTableWidgetItem()
+        self.tableWidget.setItem(15, 1, __qtablewidgetitem32)
+        __qtablewidgetitem33 = QTableWidgetItem()
+        __qtablewidgetitem33.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(16, 0, __qtablewidgetitem33)
+        __qtablewidgetitem34 = QTableWidgetItem()
+        __qtablewidgetitem34.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(17, 0, __qtablewidgetitem34)
+        __qtablewidgetitem35 = QTableWidgetItem()
+        self.tableWidget.setItem(17, 1, __qtablewidgetitem35)
+        __qtablewidgetitem36 = QTableWidgetItem()
+        __qtablewidgetitem36.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(18, 0, __qtablewidgetitem36)
+        __qtablewidgetitem37 = QTableWidgetItem()
+        self.tableWidget.setItem(18, 1, __qtablewidgetitem37)
+        __qtablewidgetitem38 = QTableWidgetItem()
+        __qtablewidgetitem38.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget.setItem(19, 0, __qtablewidgetitem38)
+        __qtablewidgetitem39 = QTableWidgetItem()
+        self.tableWidget.setItem(19, 1, __qtablewidgetitem39)
+        self.tableWidget.setObjectName(u"tableWidget")
+        font8 = QFont()
+        font8.setFamilies([u"Cairo"])
+        font8.setPointSize(10)
+        font8.setBold(False)
+        font8.setKerning(True)
+        self.tableWidget.setFont(font8)
+        self.tableWidget.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+        self.tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContentsOnFirstShow)
+        self.tableWidget.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tableWidget.setTabKeyNavigation(False)
+        self.tableWidget.setProperty("showDropIndicator", False)
+        self.tableWidget.setDragDropOverwriteMode(False)
+        self.tableWidget.setAlternatingRowColors(False)
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tableWidget.setShowGrid(True)
+        self.tableWidget.setGridStyle(Qt.PenStyle.DotLine)
+        self.tableWidget.setSortingEnabled(True)
+        self.tableWidget.setRowCount(20)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(235)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setDefaultSectionSize(50)
+
+        self.verticalLayout_17.addWidget(self.tableWidget)
+
+
+        self.gridLayout_15.addLayout(self.verticalLayout_17, 0, 0, 1, 1)
+
+        self.tabWidgetHome.addTab(self.tabShortcuts, "")
 
         self.gridLayout_2.addWidget(self.tabWidgetHome, 0, 0, 1, 1)
 
@@ -1056,8 +1246,8 @@ class Ui_MainWindowHome(object):
         self.comboBoxBankNumber.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0646\u062a\u0638\u0631 \u0643\u0648\u062f \u0627\u0644\u0628\u0646\u0643", None))
         self.comboBoxBankName.setCurrentText("")
         self.comboBoxBankName.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0627\u0633\u0645 \u0627\u0644\u0628\u0646\u0643", None))
-        self.lineEditAccountCreatorAccountNumber.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0630\u064a \u0633\u062a\u0645 \u062a\u062d\u0648\u064a\u0644 \u0644\u0647 \u0627\u0644\u0645\u0628\u0644\u063a", None))
-        self.lineEditCreatorName.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0627\u0633\u0645 \u0627\u0644\u0639\u0645\u064a\u0644 \u0627\u0644\u0630\u064a \u0633\u064a\u062a\u0645 \u062a\u062d\u0648\u064a\u0644 \u0644\u0647 \u0627\u0644\u0645\u0628\u0644\u063a", None))
+        self.lineEditAccountCreatorAccountNumber.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0645\u0643\u0648\u0646 \u0645\u0646 16 \u0631\u0642\u0645", None))
+        self.lineEditCreatorName.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0627\u0633\u0645 \u0627\u0644\u0639\u0645\u064a\u0644 \u0644\u0627 \u064a\u0642\u0644 \u0639\u0646 10 \u0627\u062d\u0631\u0641", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("MainWindowHome", u"\u062c\u062f\u0648\u0644 \u0627\u0644\u0645\u0639\u0627\u0645\u0644\u0627\u062a \u0627\u0644\u062a\u064a \u0633\u064a\u062a\u0645 \u0631\u0641\u0639\u0647\u0627", None))
         ___qtablewidgetitem = self.tableWidgetData.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0633\u0645 \u0627\u0644\u0639\u0645\u064a\u0644", None));
@@ -1068,33 +1258,35 @@ class Ui_MainWindowHome(object):
         ___qtablewidgetitem3 = self.tableWidgetData.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0633\u0645 \u0627\u0644\u0628\u0646\u0643", None));
         ___qtablewidgetitem4 = self.tableWidgetData.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u064a \u062a\u0639\u0644\u064a\u0642", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindowHome", u"\u0643\u0648\u062f \u0627\u0644\u0628\u0646\u0643", None));
         self.pushButtonNextLevel.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0646\u0642\u0631 \u0647\u0646\u0627 \u0644\u0627\u0646\u0634\u0627\u0621 \u0645\u0644\u0641 \u0627\u0644\u0627\u0643\u0633\u0644 \u0644\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u0645\u062f\u062e\u0644\u0647 \u0627\u0639\u0644\u0627\u0647 \u0648\u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644 \u0627\u0644\u064a \u0627\u0644\u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u062a\u0627\u0644\u064a\u0647", None))
         self.tabWidgetHome.setTabText(self.tabWidgetHome.indexOf(self.tabData), QCoreApplication.translate("MainWindowHome", u"\u0645\u0631\u062d\u0644\u0629 \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a", None))
-        self.label.setText(QCoreApplication.translate("MainWindowHome", u"\u0647\u0630\u0647 \u0627\u0644\u062e\u0627\u0635\u064a\u0647 \u0644\u0627 \u062a\u0639\u0645\u0644 \u0647\u0646\u0627 \u0628\u0644 \u0627\u0636\u063a\u0637 \u0639\u0644\u064a F9 \u0644\u0641\u062a\u062d \u0627\u0644\u0645\u0648\u0642\u0639 \u0641\u064a \u0645\u062a\u0635\u0641\u062d \u062e\u0627\u0631\u062c\u064a", None))
         self.groupBox_10.setTitle(QCoreApplication.translate("MainWindowHome", u"\u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0646\u0643", None))
+        self.label.setText(QCoreApplication.translate("MainWindowHome", u"\u0647\u0630\u0647 \u062e\u0627\u0635\u064a\u0629 \u062f\u0645\u062c \u0627\u0644\u0645\u0648\u0642\u0639 \u0641\u064a \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c\u060c \u0648\u0647\u064a \u062a\u062d\u062a \u0627\u0644\u0627\u062e\u062a\u0628\u0627\u0631\u060c \u0644\u0630\u0627 \u0627\u0646 \u062d\u062f\u062b \u062e\u0637\u0623 \u0627\u0636\u063a\u0637 \u0639\u0644\u064a F9 \u0644\u0644\u0639\u0645\u0644 \u0628\u0634\u0643\u0644 \u0645\u0633\u062a\u0642\u0644", None))
         self.labelWebsiteLoadPrpgress.setText(QCoreApplication.translate("MainWindowHome", u"\u062c\u0627\u0631\u064a \u0627\u0644\u062a\u062d\u0645\u064a\u0644 .. \u0627\u0646\u0638\u0631 \u0642\u0644\u064a\u0644\u0627", None))
         self.groupBox_12.setTitle(QCoreApplication.translate("MainWindowHome", u"\u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0647 - \u0647\u0630\u0647 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0644\u0645\u0633\u0627\u0639\u062f\u062a\u0643 \u0639\u0644\u064a \u062a\u0630\u0643\u0631\u0647\u0627", None))
+        self.radioButtonActivateAutoLogin.setText(QCoreApplication.translate("MainWindowHome", u"\u062a\u0634\u063a\u064a\u0644 \u062e\u0627\u0635\u064a\u0629 \u0627\u0644\u062f\u062e\u0648\u0644 \u0627\u0644\u0627\u0644\u064a", None))
+        self.radioButtonActivateAutoUpload.setText(QCoreApplication.translate("MainWindowHome", u"\u062a\u0634\u063a\u064a\u0644 \u062e\u0627\u0635\u064a\u0629 \u0627\u0644\u0631\u0641\u0639 \u0627\u0644\u0627\u0644\u064a", None))
         self.label_14.setText(QCoreApplication.translate("MainWindowHome", u"\u0647\u0630\u0647 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0644\u0645\u0633\u0627\u0639\u062f\u062a\u0643 \u0641\u0642\u0637 \u0639\u0644\u064a \u0633\u0631\u0639\u0629 \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644\u060c \u0648\u0644\u0633\u062a \u0645\u0636\u0637\u0631\u0627 \u0639\u0644\u064a \u0627\u0644\u0627\u0637\u0644\u0627\u0642 \u0627\u0644\u064a \u0627\u0633\u062e\u062f\u0627\u0645\u0647\u0627. \u0644\u0646\u0641\u0631\u0636 \u0645\u062b\u0644\u0627 \u0627\u0646\u0643 \u062a\u0631\u064a\u062f \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0627\u0644\u064a \u0627\u0644\u0645\u0648\u0642\u0639: \u0641\u0623\u0646\u062a \u062a\u062d\u062a\u0627\u062c \u0627\u0644\u064a \u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u060c \u064a\u062a\u0643\u0648\u0646 \u0645\u0646 16 \u0631\u0642\u0645\u060c \u0648\u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631. \u0641\u0647\u0644 \u0645\u0646 \u0627\u0644\u0645\u0639\u0642\u0648\u0644"
                         " \u0627\u0646\u0646\u064a \u0641\u064a \u0643\u0644 \u0645\u0631\u0629 \u0627\u0643\u062a\u0628 \u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0628\u062f\u0648\u0646 \u0627\u0646 \u062a\u0643\u0648\u0646 \u0647\u0646\u0627\u0643 \u0648\u0633\u064a\u0644\u0629 \u0644\u0627\u062f\u062e\u0627\u0644\u0647 \u0628\u0636\u063a\u0637\u0629 \u0632\u0631\u061f \u0628\u0627\u0644\u0637\u0628\u0639 \u0644\u0627. \u0644\u0630\u0627 \u062c\u0639\u0644\u0646\u0627 \u0644\u0643 \u062a\u0644\u0643 \u0627\u0644\u062e\u0627\u0646\u0627\u062a \u0628\u0627\u0644\u0627\u0633\u0641\u0644 \u0644\u062a\u0633\u0647\u064a\u0644 \u0630\u0644\u0643.", None))
         self.label_19.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645", None))
         self.label_18.setText(QCoreApplication.translate("MainWindowHome", u"\u0643\u0644\u0645\u0629 \u0627\u0644\u0633\u0631", None))
-        self.label_20.setText(QCoreApplication.translate("MainWindowHome", u"\u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindowHome", u"\u0631\u0642\u0645 \u062d\u0633\u0627\u0628 \u0627\u0641\u062a\u0631\u0627\u0636\u064a", None))
         self.label_21.setText(QCoreApplication.translate("MainWindowHome", u"\u0643\u0648\u062f \u0628\u0646\u0643 \u0627\u0641\u062a\u0631\u0627\u0636\u064a", None))
         self.label_22.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0633\u0645 \u0639\u0645\u064a\u0644 \u0627\u0641\u062a\u0631\u0627\u0636\u064a", None))
         self.label_6.setText(QCoreApplication.translate("MainWindowHome", u"\u0645\u0644\u0641 \u0627\u0644\u0627\u0643\u0633\u0644", None))
         self.lineEditUsername.setText("")
-        self.lineEditUsername.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645", None))
+        self.lineEditUsername.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0627\u0633\u0645 \u0645\u0633\u062a\u062e\u062f\u0645 \u0627\u0641\u062a\u0631\u0627\u0636\u064a", None))
         self.lineEditPassword.setInputMask("")
         self.lineEditPassword.setText("")
-        self.lineEditPassword.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0643\u0644\u0645\u0629 \u0627\u0644\u0633\u0631", None))
+        self.lineEditPassword.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0643\u0644\u0645\u0629 \u0633\u0631 \u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0647", None))
         self.lineEditDefaultAccountNumber.setText("")
         self.lineEditDefaultAccountNumber.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0631\u0642\u0645 \u062d\u0633\u0627\u0628 \u0627\u0641\u062a\u0631\u0627\u0636\u064a", None))
         self.lineEditDefaultBankCode.setText("")
         self.lineEditDefaultBankCode.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0643\u0648\u062f \u0628\u0646\u0643 \u0627\u0641\u062a\u0631\u0627\u0636\u064a", None))
         self.lineEditDefaultCustomerName.setText("")
         self.lineEditDefaultCustomerName.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062f\u062e\u0644 \u0627\u0633\u0645 \u0639\u0645\u064a\u0644 \u0627\u0641\u062a\u0631\u0627\u0636\u064a", None))
-        self.lineEditXLSXPath.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0641\u064a \u0647\u0630\u0627 \u0627\u0644\u0645\u0643\u0627\u0646 \u0633\u064a\u062a\u0645 \u0627\u0646\u0634\u0627\u0621 \u0627\u0644\u0645\u0633\u0627\u0631 \u0627\u0644\u062e\u0627\u0635 \u0628\u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u062c\u0627\u0647\u0632 \u0644\u0644\u0631\u0641\u0639 \u0639\u0644\u064a \u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0646\u0643", None))
+        self.lineEditXLSXPath.setPlaceholderText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0646\u062a\u0638\u0631 \u0645\u0633\u0627\u0631 \u0645\u0644\u0641 \u0627\u0644\u0627\u0643\u0633\u0644", None))
         self.pushButtonCopyUsername.setText(QCoreApplication.translate("MainWindowHome", u"\u0646\u0633\u062e", None))
         self.pushButtonCopyPassword.setText(QCoreApplication.translate("MainWindowHome", u"\u0646\u0633\u062e", None))
         self.pushButtonCopyAccountNumber.setText(QCoreApplication.translate("MainWindowHome", u"\u0646\u0633\u062e", None))
@@ -1102,7 +1294,7 @@ class Ui_MainWindowHome(object):
         self.pushButtonCopyCustomerName.setText(QCoreApplication.translate("MainWindowHome", u"\u0646\u0633\u062e", None))
         self.pushButtonCopyPath.setText(QCoreApplication.translate("MainWindowHome", u"\u0646\u0633\u062e", None))
         self.tabWidgetHome.setTabText(self.tabWidgetHome.indexOf(self.tabUploadData), QCoreApplication.translate("MainWindowHome", u"\u0645\u0631\u062d\u0644\u0629 \u0631\u0641\u0639 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a", None))
-        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindowHome", u"\u0627\u062a\u0645\u062a\u0647 - \u0647\u0630\u0647 \u0627\u0644\u0639\u0645\u0644\u064a\u0647 \u0644\u0646 \u062a\u062a\u062f\u062e\u0644 \u0628\u0647\u0627 \u0628\u0644 \u0633\u064a\u0642\u0648\u0645 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0628\u0641\u0639\u0644 \u0643\u0644 \u0634\u0626", None))
+        self.groupBoxAutomationParts.setTitle(QCoreApplication.translate("MainWindowHome", u"\u0627\u062a\u0645\u062a\u0647 - \u0647\u0630\u0647 \u0627\u0644\u0639\u0645\u0644\u064a\u0647 \u0644\u0646 \u062a\u062a\u062f\u062e\u0644 \u0628\u0647\u0627 \u0628\u0644 \u0633\u064a\u0642\u0648\u0645 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0628\u0641\u0639\u0644 \u0643\u0644 \u0634\u0626", None))
         self.groupBox_8.setTitle(QCoreApplication.translate("MainWindowHome", u"\u0627\u0633\u062a\u062d\u0631\u0627\u062c \u062a\u0642\u0631\u064a\u0631", None))
         self.label_5.setText(QCoreApplication.translate("MainWindowHome", u"\u0633\u064a\u0642\u0648\u0645 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0628\u0634\u0643\u0644 \u0627\u0648\u062a\u0648\u0645\u0627\u062a\u064a\u0643\u064a \u0628\u0627\u0644\u062f\u062e\u0648\u0644 \u0627\u0644\u064a \u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0646\u0643 \u0648\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0628\u0634\u0643\u0644 \u062a\u0644\u0642\u0627\u0626\u064a \u0628\u0646\u0627\u0621\u0627 \u0639\u0644\u064a \u0627\u0644\u0628\u064a\u0627\u0646\u062a \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0647 \u0627\u0644\u0645\u062f\u062e\u0644\u0629 \u0645\u0646 \u0642\u0628\u0644 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u060c \u0648\u0628\u0639\u062f \u0630\u0644\u0643 \u064a\u0636\u063a\u0637 \u0639\u0644\u064a \u0639\u0631\u0636 \u0627\u0644\u062a\u0642\u0627\u0631\u064a\u0631 \u0648\u064a\u062e\u062a\u0627\u0631 \u0627\u0644\u0645\u062f\u0629 \u0648\u0643\u0630\u0644\u0643 \u0646\u0648\u0639 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0645"
                         "\u062e\u0631\u062c", None))
@@ -1111,8 +1303,8 @@ class Ui_MainWindowHome(object):
         self.label_8.setText(QCoreApplication.translate("MainWindowHome", u"\u0633\u064a\u0642\u0648\u0645 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0628\u0634\u0643\u0644 \u0627\u0648\u062a\u0648\u0645\u0627\u062a\u064a\u0643\u064a \u0628\u0627\u0644\u062f\u062e\u0648\u0644 \u0627\u0644\u064a \u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0646\u0643 \u0648\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0628\u0634\u0643\u0644 \u062a\u0644\u0642\u0627\u0626\u064a \u0628\u0646\u0627\u0621\u0627 \u0639\u0644\u064a \u0627\u0644\u0628\u064a\u0627\u0646\u062a \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0647 \u0627\u0644\u0645\u062f\u062e\u0644\u0629 \u0645\u0646 \u0642\u0628\u0644 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u060c \u0648\u0628\u0639\u062f \u0630\u0644\u0643 \u064a\u0636\u063a\u0637 \u0639\u0644\u064a \u0639\u0631\u0636 \u0627\u0644\u062a\u0642\u0627\u0631\u064a\u0631 \u0648\u064a\u062e\u062a\u0627\u0631 \u0627\u0644\u0645\u062f\u0629 \u0648\u0643\u0630\u0644\u0643 \u0646\u0648\u0639 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0645"
                         "\u062e\u0631\u062c", None))
         self.pushButton_6.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062d\u0635\u0644 \u0639\u0644\u064a \u0627\u0644\u062a\u0642\u0631\u064a\u0631", None))
-        self.groupBox.setTitle(QCoreApplication.translate("MainWindowHome", u"\u0627\u0633\u062a\u062d\u0631\u0627\u062c \u062a\u0642\u0631\u064a\u0631", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindowHome", u"\u0633\u064a\u0642\u0648\u0645 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0628\u0634\u0643\u0644 \u0627\u0648\u062a\u0648\u0645\u0627\u062a\u064a\u0643\u064a \u0628\u0627\u0644\u062f\u062e\u0648\u0644 \u0627\u0644\u064a \u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0646\u0643 \u0648\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0628\u0634\u0643\u0644 \u062a\u0644\u0642\u0627\u0626\u064a \u0628\u0646\u0627\u0621\u0627 \u0639\u0644\u064a \u0627\u0644\u0628\u064a\u0627\u0646\u062a \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0647 \u0627\u0644\u0645\u062f\u062e\u0644\u0629 \u0645\u0646 \u0642\u0628\u0644 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u060c \u0648\u0628\u0639\u062f \u0630\u0644\u0643 \u064a\u0636\u063a\u0637 \u0639\u0644\u064a \u0639\u0631\u0636 \u0627\u0644\u062a\u0642\u0627\u0631\u064a\u0631 \u0648\u064a\u062e\u062a\u0627\u0631 \u0627\u0644\u0645\u062f\u0629 \u0648\u0643\u0630\u0644\u0643 \u0646\u0648\u0639 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0645"
+        self.groupBoxGetReports.setTitle(QCoreApplication.translate("MainWindowHome", u"\u0627\u0633\u062a\u062e\u0631\u0627\u062c \u062a\u0642\u0631\u064a\u0631", None))
+        self.labelGetReports.setText(QCoreApplication.translate("MainWindowHome", u"\u0633\u064a\u0642\u0648\u0645 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0628\u0634\u0643\u0644 \u0627\u0648\u062a\u0648\u0645\u0627\u062a\u064a\u0643\u064a \u0628\u0627\u0644\u062f\u062e\u0648\u0644 \u0627\u0644\u064a \u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0646\u0643 \u0648\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0628\u0634\u0643\u0644 \u062a\u0644\u0642\u0627\u0626\u064a \u0628\u0646\u0627\u0621\u0627 \u0639\u0644\u064a \u0627\u0644\u0628\u064a\u0627\u0646\u062a \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0647 \u0627\u0644\u0645\u062f\u062e\u0644\u0629 \u0645\u0646 \u0642\u0628\u0644 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u060c \u0648\u0628\u0639\u062f \u0630\u0644\u0643 \u064a\u0636\u063a\u0637 \u0639\u0644\u064a \u0639\u0631\u0636 \u0627\u0644\u062a\u0642\u0627\u0631\u064a\u0631 \u0648\u064a\u062e\u062a\u0627\u0631 \u0627\u0644\u0645\u062f\u0629 \u0648\u0643\u0630\u0644\u0643 \u0646\u0648\u0639 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0645"
                         "\u062e\u0631\u062c", None))
         self.dateEditReportFrom.setSpecialValueText("")
         self.dateEditReportTo.setSpecialValueText("")
@@ -1141,7 +1333,85 @@ class Ui_MainWindowHome(object):
         self.label_13.setText(QCoreApplication.translate("MainWindowHome", u"\u0633\u064a\u0642\u0648\u0645 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0628\u0634\u0643\u0644 \u0627\u0648\u062a\u0648\u0645\u0627\u062a\u064a\u0643\u064a \u0628\u0627\u0644\u062f\u062e\u0648\u0644 \u0627\u0644\u064a \u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0646\u0643 \u0648\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0628\u0634\u0643\u0644 \u062a\u0644\u0642\u0627\u0626\u064a \u0628\u0646\u0627\u0621\u0627 \u0639\u0644\u064a \u0627\u0644\u0628\u064a\u0627\u0646\u062a \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0647 \u0627\u0644\u0645\u062f\u062e\u0644\u0629 \u0645\u0646 \u0642\u0628\u0644 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u060c \u0648\u0628\u0639\u062f \u0630\u0644\u0643 \u064a\u0636\u063a\u0637 \u0639\u0644\u064a \u0639\u0631\u0636 \u0627\u0644\u062a\u0642\u0627\u0631\u064a\u0631 \u0648\u064a\u062e\u062a\u0627\u0631 \u0627\u0644\u0645\u062f\u0629 \u0648\u0643\u0630\u0644\u0643 \u0646\u0648\u0639 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0645"
                         "\u062e\u0631\u062c", None))
         self.pushButton_10.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062d\u0635\u0644 \u0639\u0644\u064a \u0627\u0644\u062a\u0642\u0631\u064a\u0631", None))
-        self.tabWidgetHome.setTabText(self.tabWidgetHome.indexOf(self.tab), QCoreApplication.translate("MainWindowHome", u"\u0645\u0647\u0627\u0645 \u0633\u0631\u064a\u0639\u0647", None))
+        self.labelWarningAboutQuickParts.setText(QCoreApplication.translate("MainWindowHome", u"\u0647\u0630\u0647 \u0627\u0644\u062e\u0648\u0627\u0635 \u0644\u0627 \u062a\u0639\u0645\u0644 \u062d\u0627\u0644\u064a\u0627\u060c \u0648\u0647\u064a \u062a\u062d\u062a \u0627\u0644\u0627\u062e\u062a\u0628\u0627\u0631 \u0648\u0633\u064a\u062a\u0645 \u062a\u0641\u0639\u064a\u0644\u0647\u0627 \u062d\u064a\u0646 \u0646\u0646\u062a\u0647\u064a \u0645\u0646 \u0627\u0644\u0627\u062e\u062a\u0628\u0627\u0631 \u0645\u0639 \u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062c\u062f\u064a\u062f\u0629 \u0628\u0627\u0630\u0646 \u0627\u0644\u0644\u0647", None))
+        self.tabWidgetHome.setTabText(self.tabWidgetHome.indexOf(self.tabQuickParts), QCoreApplication.translate("MainWindowHome", u"\u0645\u0647\u0627\u0645 \u0633\u0631\u064a\u0639\u0647", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0647\u0627\u0645\u0629 \u0641\u064a \u062a\u0633\u0631\u064a\u0639 \u0644\u062a\u062d\u0633\u064a\u0646 \u062a\u062c\u0631\u0628\u0629 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645", None))
+        ___qtablewidgetitem5 = self.tableWidget.horizontalHeaderItem(0)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0644\u0627\u062e\u062a\u0635\u0627\u0631", None));
+        ___qtablewidgetitem6 = self.tableWidget.horizontalHeaderItem(1)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0644\u0648\u0635\u0641", None));
+
+        __sortingEnabled = self.tableWidget.isSortingEnabled()
+        self.tableWidget.setSortingEnabled(False)
+        ___qtablewidgetitem7 = self.tableWidget.item(0, 0)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindowHome", u"Ctrl+Tab", None));
+        ___qtablewidgetitem8 = self.tableWidget.item(0, 1)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644 \u0627\u0644\u064a \u0627\u0644\u0635\u0641\u062d\u0629 \u0627\u0644\u062a\u0627\u0644\u064a\u0647 \u0645\u0646 \u0627\u0644\u064a\u0645\u064a\u0646 \u0627\u0644\u064a \u0627\u0644\u064a\u0633\u0627\u0631", None));
+        ___qtablewidgetitem9 = self.tableWidget.item(1, 0)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindowHome", u"Ctrl+Shift+Tab", None));
+        ___qtablewidgetitem10 = self.tableWidget.item(1, 1)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644 \u0627\u0644\u064a \u0627\u0644\u0635\u0641\u062d\u0629 \u0627\u0644\u0633\u0627\u0628\u0642\u0647 \u0645\u0646 \u0627\u0644\u064a\u0633\u0627\u0631 \u0627\u0644\u064a \u0627\u0644\u064a\u0645\u064a\u0646", None));
+        ___qtablewidgetitem11 = self.tableWidget.item(2, 0)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindowHome", u"Insert", None));
+        ___qtablewidgetitem12 = self.tableWidget.item(2, 1)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0636\u0627\u0641\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0641\u064a \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0639\u0644\u0648\u064a\u0629 \u0627\u0644\u064a \u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u0633\u0641\u0644\u064a", None));
+        ___qtablewidgetitem13 = self.tableWidget.item(3, 0)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindowHome", u"Refresh", None));
+        ___qtablewidgetitem14 = self.tableWidget.item(3, 1)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0639\u0627\u062f\u0629 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u062a\u0637\u0628\u064a\u0642", None));
+        ___qtablewidgetitem15 = self.tableWidget.item(4, 0)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindowHome", u"Delete", None));
+        ___qtablewidgetitem16 = self.tableWidget.item(4, 1)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindowHome", u"\u062d\u0630\u0641 \u0627\u0644\u0635\u0641 \u0627\u0644\u062d\u0627\u0644\u064a \u0645\u0646 \u0627\u0644\u062c\u062f\u0648\u0644", None));
+        ___qtablewidgetitem17 = self.tableWidget.item(5, 0)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindowHome", u"F1", None));
+        ___qtablewidgetitem18 = self.tableWidget.item(5, 1)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindowHome", u"\u0641\u062a\u062d \u0634\u0627\u0634\u0629 `\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u062a\u0637\u0628\u064a\u0642`", None));
+        ___qtablewidgetitem19 = self.tableWidget.item(6, 0)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindowHome", u"F2", None));
+        ___qtablewidgetitem20 = self.tableWidget.item(7, 0)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindowHome", u"F3", None));
+        ___qtablewidgetitem21 = self.tableWidget.item(8, 0)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindowHome", u"F4", None));
+        ___qtablewidgetitem22 = self.tableWidget.item(9, 0)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindowHome", u"F5", None));
+        ___qtablewidgetitem23 = self.tableWidget.item(9, 1)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0639\u0627\u062f\u0629 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u062a\u0637\u0628\u064a\u0642", None));
+        ___qtablewidgetitem24 = self.tableWidget.item(10, 0)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindowHome", u"F6", None));
+        ___qtablewidgetitem25 = self.tableWidget.item(10, 1)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0646\u0634\u0627\u0621 \u0645\u0639\u0627\u0645\u0644\u0629 \u0628\u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0647 - \u062a\u0633\u062a\u062e\u062f\u0645 \u0645\u0646 \u0642\u0628\u0644 \u0627\u0644\u0645\u0637\u0648\u0631 \u0641\u0642\u0637", None));
+        ___qtablewidgetitem26 = self.tableWidget.item(11, 0)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindowHome", u"F7", None));
+        ___qtablewidgetitem27 = self.tableWidget.item(12, 0)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindowHome", u"F8", None));
+        ___qtablewidgetitem28 = self.tableWidget.item(13, 0)
+        ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindowHome", u"F9", None));
+        ___qtablewidgetitem29 = self.tableWidget.item(13, 1)
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindowHome", u"\u0641\u062a\u062d \u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0646\u0643 \u0641\u064a \u0645\u062a\u0635\u0641 \u062e\u0627\u0631\u062c\u064a", None));
+        ___qtablewidgetitem30 = self.tableWidget.item(14, 0)
+        ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindowHome", u"F10", None));
+        ___qtablewidgetitem31 = self.tableWidget.item(15, 0)
+        ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindowHome", u"F11", None));
+        ___qtablewidgetitem32 = self.tableWidget.item(15, 1)
+        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindowHome", u"\u062a\u0643\u0628\u064a\u0631 \u0648\u062a\u0635\u063a\u064a\u0631 \u0627\u0644\u0634\u0627\u0634\u0629 \u0627\u0644\u062d\u0627\u0644\u0647", None));
+        ___qtablewidgetitem33 = self.tableWidget.item(16, 0)
+        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindowHome", u"F12", None));
+        ___qtablewidgetitem34 = self.tableWidget.item(17, 0)
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindowHome", u"Ctrl+P", None));
+        ___qtablewidgetitem35 = self.tableWidget.item(17, 1)
+        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u062e\u062f \u0644\u0642\u0637\u0629 \u0634\u0627\u0634\u0647 \u0644\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0643\u0645\u0627 \u0647\u0648 \u0627\u0644\u0627\u0646", None));
+        ___qtablewidgetitem36 = self.tableWidget.item(18, 0)
+        ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindowHome", u"Esc", None));
+        ___qtablewidgetitem37 = self.tableWidget.item(18, 1)
+        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u063a\u0644\u0627\u0642 \u0627\u064a \u0634\u0627\u0634\u0629 \u0641\u0631\u0639\u064a\u0647", None));
+        ___qtablewidgetitem38 = self.tableWidget.item(19, 0)
+        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindowHome", u"Ctrl+Number", None));
+        ___qtablewidgetitem39 = self.tableWidget.item(19, 1)
+        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindowHome", u"\u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644 \u0627\u0644\u064a \u0627\u0644\u062a\u0628\u0648\u064a\u0628 \u0631\u0642\u0645 <\u0631\u0642\u0645 \u0627\u0644\u062a\u0628\u0648\u064a\u0628>", None));
+        self.tableWidget.setSortingEnabled(__sortingEnabled)
+
+        self.tabWidgetHome.setTabText(self.tabWidgetHome.indexOf(self.tabShortcuts), QCoreApplication.translate("MainWindowHome", u"\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a", None))
 #if QT_CONFIG(tooltip)
         self.statusbar.setToolTip("")
 #endif // QT_CONFIG(tooltip)
