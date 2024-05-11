@@ -1,0 +1,39 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Mahros AL-Qabasy\Auto-Bank\App\Info]
+"Name"="Auto-Bank"
+"Icon"="design/icons/app.ico"
+"Repo"="github.com/elqabasy/Auto-Bank"
+"Version"="1.0.0"
+"Language"="ar"
+"Serial"=""
+"Encoding"="UTF-8"
+
+[HKEY_CURRENT_USER\Software\Mahros AL-Qabasy\Auto-Bank\App\Author]
+"Name"="Mahros AL-Qabasy"
+"Mail"="mahros.elqabasy@hotmail.com"
+"Phone"="+20 1015888272"
+
+[HKEY_CURRENT_USER\Software\Mahros AL-Qabasy\Auto-Bank\Currency]
+"Name"="Pound"
+"Code"="EGP"
+"Icon"=""
+"Language"="ar"
+
+[HKEY_CURRENT_USER\Software\Mahros AL-Qabasy\Auto-Bank\Defaults\Transaction]
+"CreditorName"=""
+"CreditorBankName"=""
+"CreditorBankCode"=""
+"CreditorAccountNumber"=""
+
+[HKEY_CURRENT_USER\Software\Mahros AL-Qabasy\Auto-Bank\Defaults\Session]
+"Username"=""
+"Password"=""
+
+[HKEY_CURRENT_USER\Software\Mahros AL-Qabasy\Auto-Bank\Database]
+"Name"="database.db"
+"Path"="database.db"
+
+[HKEY_CURRENT_USER\Software\Mahros AL-Qabasy\Auto-Bank\Design\Fonts]
+"Path"="design/fonts"
+"Extension"=".ttf"

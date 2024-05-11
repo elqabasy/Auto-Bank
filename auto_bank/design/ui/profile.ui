@@ -263,7 +263,10 @@
             <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
            </property>
            <property name="text">
-            <string>2.0.0</string>
+            <string>0.0.0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
            <property name="readOnly">
             <bool>true</bool>
@@ -297,6 +300,9 @@
            <property name="text">
             <string>Mahros AL-Qabasy</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -328,6 +334,9 @@
            </property>
            <property name="text">
             <string>mahros.elqabasy@hotmail.com</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
            <property name="readOnly">
             <bool>true</bool>
@@ -361,6 +370,9 @@
            <property name="text">
             <string>+20 1015888272</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -390,8 +402,14 @@
              <height>35</height>
             </size>
            </property>
+           <property name="contextMenuPolicy">
+            <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+           </property>
            <property name="text">
             <string>https://github.com/elqabasy/Auto-Bank/releases/tag/Basic-Features</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
            <property name="readOnly">
             <bool>true</bool>

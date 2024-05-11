@@ -14,6 +14,12 @@
     <height>637</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Candara</family>
+    <pointsize>1</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>الرئيسية | برنامج البنك</string>
   </property>
@@ -36,7 +42,7 @@
      <number>0</number>
     </property>
     <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -183,8 +189,14 @@
         <property name="lineWidth">
          <number>1</number>
         </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout_2">
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item row="0" column="0">
            <widget class="QTabWidget" name="tabWidgetHome">
             <property name="enabled">
@@ -203,7 +215,7 @@
              <enum>QTabWidget::TabPosition::North</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <property name="documentMode">
              <bool>false</bool>
@@ -359,7 +371,7 @@
                        <property name="minimumSize">
                         <size>
                          <width>0</width>
-                         <height>35</height>
+                         <height>38</height>
                         </size>
                        </property>
                        <property name="font">
@@ -427,49 +439,6 @@
                    <widget class="QWidget" name="layoutWidget3">
                     <layout class="QHBoxLayout" name="horizontalLayout_13">
                      <item>
-                      <widget class="QComboBox" name="comboBoxBankNumber">
-                       <property name="enabled">
-                        <bool>false</bool>
-                       </property>
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>35</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>108</width>
-                         <height>16777215</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <family>Cairo</family>
-                         <pointsize>9</pointsize>
-                        </font>
-                       </property>
-                       <property name="editable">
-                        <bool>false</bool>
-                       </property>
-                       <property name="currentText">
-                        <string/>
-                       </property>
-                       <property name="minimumContentsLength">
-                        <number>11</number>
-                       </property>
-                       <property name="placeholderText">
-                        <string>انتظر كود البنك</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
                       <widget class="QComboBox" name="comboBoxBankName">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -480,7 +449,7 @@
                        <property name="minimumSize">
                         <size>
                          <width>0</width>
-                         <height>35</height>
+                         <height>38</height>
                         </size>
                        </property>
                        <property name="font">
@@ -506,7 +475,7 @@
                     </layout>
                    </widget>
                    <widget class="QWidget" name="layoutWidget4">
-                    <layout class="QHBoxLayout" name="horizontalLayout_12">
+                    <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="1,1">
                      <item>
                       <widget class="QLineEdit" name="lineEditAccountCreatorAccountNumber">
                        <property name="sizePolicy">
@@ -527,8 +496,14 @@
                          <pointsize>9</pointsize>
                         </font>
                        </property>
+                       <property name="layoutDirection">
+                        <enum>Qt::LayoutDirection::RightToLeft</enum>
+                       </property>
                        <property name="maxLength">
                         <number>16</number>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignmentFlag::AlignCenter</set>
                        </property>
                        <property name="placeholderText">
                         <string>ادخل رقم الحساب المكون من 16 رقم</string>
@@ -555,11 +530,17 @@
                          <pointsize>9</pointsize>
                         </font>
                        </property>
+                       <property name="layoutDirection">
+                        <enum>Qt::LayoutDirection::RightToLeft</enum>
+                       </property>
                        <property name="maxLength">
                         <number>63</number>
                        </property>
+                       <property name="alignment">
+                        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+                       </property>
                        <property name="placeholderText">
-                        <string>ادخل اسم العميل لا يقل عن 10 احرف</string>
+                        <string>ادخل اسم العميل باللغة العربية و لا يقل عن 10 احرف</string>
                        </property>
                       </widget>
                      </item>
@@ -974,7 +955,7 @@
                          <item>
                           <widget class="QLabel" name="label_21">
                            <property name="text">
-                            <string>كود بنك افتراضي</string>
+                            <string>اسم بنك افتراضي</string>
                            </property>
                           </widget>
                          </item>
@@ -1030,7 +1011,7 @@
                        <item>
                         <layout class="QVBoxLayout" name="verticalLayout_15">
                          <item>
-                          <widget class="QLineEdit" name="lineEditUsername">
+                          <widget class="QLineEdit" name="lineEditDefaultUsername">
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
@@ -1065,7 +1046,7 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QLineEdit" name="lineEditPassword">
+                          <widget class="QLineEdit" name="lineEditDefaultPassword">
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
@@ -1125,6 +1106,9 @@
                            <property name="text">
                             <string/>
                            </property>
+                           <property name="maxLength">
+                            <number>16</number>
+                           </property>
                            <property name="frame">
                             <bool>false</bool>
                            </property>
@@ -1150,7 +1134,7 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QLineEdit" name="lineEditDefaultBankCode">
+                          <widget class="QLineEdit" name="lineEditDefaultBankName">
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
@@ -1167,7 +1151,7 @@
                             <set>Qt::AlignmentFlag::AlignCenter</set>
                            </property>
                            <property name="placeholderText">
-                            <string>ادخل كود بنك افتراضي</string>
+                            <string>ادخل اسم بنك افتراضي</string>
                            </property>
                           </widget>
                          </item>
@@ -1346,7 +1330,7 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButtonCopyBankCode">
+                          <widget class="QPushButton" name="pushButtonCopyBankName">
                            <property name="font">
                             <font>
                              <family>Cairo</family>
@@ -2444,10 +2428,35 @@
   <tabstop>pushButtonNextLevel</tabstop>
   <tabstop>pushButtonRefresh</tabstop>
   <tabstop>tableWidgetData</tabstop>
-  <tabstop>comboBoxBankNumber</tabstop>
   <tabstop>pushButtonDelete</tabstop>
   <tabstop>tabWidgetHome</tabstop>
   <tabstop>radioButtonAccountStatus</tabstop>
+  <tabstop>radioButtonActivateAutoLogin</tabstop>
+  <tabstop>radioButtonActivateAutoUpload</tabstop>
+  <tabstop>lineEditDefaultUsername</tabstop>
+  <tabstop>lineEditDefaultPassword</tabstop>
+  <tabstop>lineEditDefaultAccountNumber</tabstop>
+  <tabstop>lineEditDefaultBankName</tabstop>
+  <tabstop>lineEditDefaultCustomerName</tabstop>
+  <tabstop>lineEditXLSXPath</tabstop>
+  <tabstop>pushButtonCopyUsername</tabstop>
+  <tabstop>pushButtonCopyPassword</tabstop>
+  <tabstop>pushButtonCopyAccountNumber</tabstop>
+  <tabstop>pushButtonCopyBankName</tabstop>
+  <tabstop>pushButtonCopyCustomerName</tabstop>
+  <tabstop>pushButtonCopyPath</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>dateEditReportFrom</tabstop>
+  <tabstop>dateEditReportTo</tabstop>
+  <tabstop>pushButtonGetDatedReport</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>tableWidget</tabstop>
  </tabstops>
  <resources>
   <include location="../resources.qrc"/>

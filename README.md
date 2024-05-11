@@ -6,6 +6,7 @@ Auto-Bank Payments Maker
     * Features
         - New window `ProfileInfo` contain  current app information.
         - Prevent Duplicate Transaction using MD5 hash checker.
+        - Next: Interaction to application using voice?
     * Updates 
         - Security Update
     * Enhancement 

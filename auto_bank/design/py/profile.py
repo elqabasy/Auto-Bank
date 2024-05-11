@@ -25,7 +25,7 @@ class Ui_DialogMe(object):
         if not DialogMe.objectName():
             DialogMe.setObjectName(u"DialogMe")
         DialogMe.setWindowModality(Qt.WindowModality.WindowModal)
-        DialogMe.resize(400, 300)
+        DialogMe.resize(400, 309)
         font = QFont()
         font.setFamilies([u"Cairo"])
         font.setPointSize(12)
@@ -133,6 +133,7 @@ class Ui_DialogMe(object):
         self.lineEditVersion.setObjectName(u"lineEditVersion")
         self.lineEditVersion.setMinimumSize(QSize(0, 35))
         self.lineEditVersion.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
+        self.lineEditVersion.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEditVersion.setReadOnly(True)
 
         self.verticalLayout_2.addWidget(self.lineEditVersion)
@@ -144,6 +145,7 @@ class Ui_DialogMe(object):
         self.lineEditAuthor = QLineEdit(DialogMe)
         self.lineEditAuthor.setObjectName(u"lineEditAuthor")
         self.lineEditAuthor.setMinimumSize(QSize(0, 35))
+        self.lineEditAuthor.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEditAuthor.setReadOnly(True)
 
         self.verticalLayout_2.addWidget(self.lineEditAuthor)
@@ -155,6 +157,7 @@ class Ui_DialogMe(object):
         self.lineEditEmail = QLineEdit(DialogMe)
         self.lineEditEmail.setObjectName(u"lineEditEmail")
         self.lineEditEmail.setMinimumSize(QSize(0, 35))
+        self.lineEditEmail.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEditEmail.setReadOnly(True)
 
         self.verticalLayout_2.addWidget(self.lineEditEmail)
@@ -166,6 +169,7 @@ class Ui_DialogMe(object):
         self.lineEditPhone = QLineEdit(DialogMe)
         self.lineEditPhone.setObjectName(u"lineEditPhone")
         self.lineEditPhone.setMinimumSize(QSize(0, 35))
+        self.lineEditPhone.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEditPhone.setReadOnly(True)
 
         self.verticalLayout_2.addWidget(self.lineEditPhone)
@@ -177,6 +181,8 @@ class Ui_DialogMe(object):
         self.lineEditGithub = QLineEdit(DialogMe)
         self.lineEditGithub.setObjectName(u"lineEditGithub")
         self.lineEditGithub.setMinimumSize(QSize(0, 35))
+        self.lineEditGithub.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
+        self.lineEditGithub.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEditGithub.setReadOnly(True)
 
         self.verticalLayout_2.addWidget(self.lineEditGithub)
@@ -209,11 +215,15 @@ class Ui_DialogMe(object):
         self.label_4.setText(QCoreApplication.translate("DialogMe", u"Email", None))
         self.label_5.setText(QCoreApplication.translate("DialogMe", u"Phone", None))
         self.label_6.setText(QCoreApplication.translate("DialogMe", u"Github", None))
-        self.lineEditVersion.setText("")
+        self.lineEditVersion.setText(QCoreApplication.translate("DialogMe", u"0.0.0", None))
         self.lineEditVersion.setPlaceholderText(QCoreApplication.translate("DialogMe", u"Version", None))
+        self.lineEditAuthor.setText(QCoreApplication.translate("DialogMe", u"Mahros AL-Qabasy", None))
         self.lineEditAuthor.setPlaceholderText(QCoreApplication.translate("DialogMe", u"Author", None))
+        self.lineEditEmail.setText(QCoreApplication.translate("DialogMe", u"mahros.elqabasy@hotmail.com", None))
         self.lineEditEmail.setPlaceholderText(QCoreApplication.translate("DialogMe", u"Email", None))
+        self.lineEditPhone.setText(QCoreApplication.translate("DialogMe", u"+20 1015888272", None))
         self.lineEditPhone.setPlaceholderText(QCoreApplication.translate("DialogMe", u"Phone", None))
+        self.lineEditGithub.setText(QCoreApplication.translate("DialogMe", u"https://github.com/elqabasy/Auto-Bank/releases/tag/Basic-Features", None))
         self.lineEditGithub.setPlaceholderText(QCoreApplication.translate("DialogMe", u"Github", None))
     # retranslateUi
 
