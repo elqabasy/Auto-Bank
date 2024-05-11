@@ -1,12 +1,10 @@
+# builtin packages
 import sqlite3
-# from constants import *
 
-
-import sqlite3, shutil, os, datetime
-
+# me
 
 class Database:
-    def __init__(self, DBName:str="database.db") -> None:
+    def __init__(self, DBName:str) -> None:
         self.DBCursor = None
         self.DBFile = str(DBName).strip()
         self.DBSql = sqlite3.connect(self.DBFile)
@@ -27,7 +25,7 @@ class Database:
                 return Error
         return False
 
-    def Query(self,Query:str=None, params:dict=None):
+    def Query(self, Query:str=None, params:dict=None):
         if Query:
             if params:
                 self.DBCursor.execute(Query, params)
@@ -44,14 +42,22 @@ class Database:
             return Error
 
 
-DATABASE = Database()
+
+class BankDatabase(Database):
+    def __init__(self, DBName:str) -> None:
+        super().__init__(DBName)
 
 
-# banks
-Result = DATABASE.Query("""
-CREATE TABLE IF NOT EXISTS `Banks`(
-    `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    `Name` TEXT NOT NULL UNIQUE,
-    `Serial` VARCHAR(11) NOT NULL UNIQUE
+    def getData(self):
+        QUERY_STR:str   = "SELECT Name, Serial FROM `Banks`;"
+        RESULT:str      = self.Query(QUERY_STR)
+        return RESULT
 
-);""")
+    def getBankName(self, code:str):
+        pass
+    
+    def getBankCode(self, name:str):
+        name = str(name).strip()
+        QUERY_STR:str   = "SELECT Serial FROM `Banks` WHERE Name = ?"
+        RESULT:str      = self.Query(QUERY_STR, (name,))
+        return RESULT

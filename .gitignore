@@ -167,3 +167,4 @@ source/auth.py
 source/ErrorSignal.py
 source/automation.py
 test.py
+Auto-Bank/converter.py
