@@ -70,3 +70,21 @@ class Settings:
         class Fonts(Enum):
             Path                            = "Design/Fonts/Path"
             Extension                       = "Design/Fonts/Extension"
+    
+    class PackageSettings:
+        class Keyboard:
+            class Layouts(Enum):
+                Arabic                      = {
+                                                # Arabic Layouts
+                                                '0x0401': 'Arabic (101)',
+                                                '0x0c01': 'Arabic (101) - Egypt',
+                                                '0x3c01': 'Arabic (101) - Bahrain',
+                                                '0xc01': 'Arabic (102) AZERTY - Egypt',
+                                                '0x1401': 'Arabic (102) AZERTY - Algeria'
+                                            }
+            
+                English                      = {
+                                                # English Layouts
+                                                '0x409': 'English',
+                                                '0x419': 'Russian'
+                                            }
