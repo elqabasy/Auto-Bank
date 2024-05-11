@@ -168,3 +168,4 @@ source/ErrorSignal.py
 source/automation.py
 test.py
 Auto-Bank/converter.py
+Auto-Bank/main_test.py

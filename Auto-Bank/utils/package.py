@@ -72,12 +72,10 @@ def convert_to_english_numerals(hindi_arabic_numerals):
     return ''.join(numeral_mapping.get(char, char) for char in hindi_arabic_numerals)
 
 
-import ctypes  
-
-
-def get_current_keyboard_language():
+from ctypes import WinDLL
+def get_current_keyboard_language_code():
     # Load the user32 DLL
-    user32 = ctypes.WinDLL('user32', use_last_error=True)
+    user32 = WinDLL('user32', use_last_error=True)
 
     # Get the foreground window
     curr_window = user32.GetForegroundWindow()
@@ -94,48 +92,16 @@ def get_current_keyboard_language():
     # Convert the language ID from decimal to hexadecimal
     language_id_hex = hex(language_id)
 
-    # You can create a dictionary mapping the language ID to the language name
-    languages = {
-        '0x409': 'English',
-        '0x419': 'Russian',
-        '0xC01': 'Arabic (Egypt)',
-        '0x401': 'Arabic (Saudi Arabia)',
-        # Add more language IDs and their corresponding names
-    }
+    return language_id_hex
 
-    # Check if the hex value is in the dictionary
-    if language_id_hex in languages:
-        current_language = languages[language_id_hex]
-    else:
-        current_language = 'Unknown'
-
-    return current_language
-
-
-
-
-# import winreg
-# def get_keyboard_layout_ids():
-#     key_path = r"SYSTEM\\CurrentControlSet\\Control\\Keyboard Layouts"
-#     layout_ids = []
-#     with winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE) as hklm:
-#         with winreg.OpenKey(hklm, key_path) as key_layouts:
-#             i = 0
-#             while True:
-#                 try:
-#                     layout_id = winreg.EnumKey(key_layouts, i)
-#                     layout_ids.append(layout_id)
-#                     i += 1
-#                 except OSError:
-#                     break
-#     return layout_ids
-
-
-import keyboard
+from keyboard import press, release
 def changeLanguageToArabic():
-    if get_current_keyboard_language() != "Arabic (Saudi Arabia)" and "Arabic (Egypt)":
-        keyboard.press('alt')
-        keyboard.press('shift')
-        keyboard.release('shift')
-        keyboard.release('alt')
-
+    try:
+        current = get_current_keyboard_language_code()
+        if current not in Settings.PackageSettings.Keyboard.Layouts.Arabic.value:
+            press('alt')
+            press('shift')
+            release('shift')
+            release('alt')
+    except Exception as Error:
+        showErrorMessage(Error)

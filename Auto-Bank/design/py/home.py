@@ -544,6 +544,7 @@ class Ui_MainWindowHome(object):
         self.lineEditDefaultAccountNumber = QLineEdit(self.groupBox_12)
         self.lineEditDefaultAccountNumber.setObjectName(u"lineEditDefaultAccountNumber")
         self.lineEditDefaultAccountNumber.setMinimumSize(QSize(0, 32))
+        self.lineEditDefaultAccountNumber.setMaxLength(16)
         self.lineEditDefaultAccountNumber.setFrame(False)
         self.lineEditDefaultAccountNumber.setAlignment(Qt.AlignmentFlag.AlignCenter)
 

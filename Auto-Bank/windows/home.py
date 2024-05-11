@@ -31,15 +31,15 @@ class Home(QMainWindow, Ui_MainWindowHome):
         self._profile = QWebEngineProfile("PROFILE_NAME")
         self.setupUi(self)
         self.setWindowFlag(Qt.WindowType.WindowCloseButtonHint, True)
-
         self.initView()
+        self.initBlur()
         self.initDefaults()
         self.initShortcuts()
+        self.initValidators() # high priority
         self.initEntryInputs()
         self.initButtonsActions()
         self.initWebEngineSettings()
-        self.initValidators() # high priority
-        self.initBlur()
+        self.setFocus()
 
     def initValidators(self):
         self.lineEditCreatorName.setValidator(ArabicValidator())
@@ -243,7 +243,9 @@ class Home(QMainWindow, Ui_MainWindowHome):
 
         # application - all 
         openProfileInfo = QShortcut("F1", self).activated.connect(lambda: ShowOtherWindow(self, ProfileInfo))
-        refreshApplication = QShortcut(QKeySequence.StandardKey.Refresh, self).activated.connect(lambda: self.tabWidgetHome.setCurrentIndex(self.getNextTabIndex(-1)))
+        refreshApplication = QShortcut(QKeySequence.StandardKey.Refresh, self).activated.connect(lambda: self.refreshApplication())
+        refreshApplication = QShortcut("F5", self).activated.connect(lambda: self.refreshApplication())
+        
         takeScreenShot = QShortcut(QKeySequence.StandardKey.Print, self).activated.connect(lambda: TakeScreenShot(self))
 
     def getNextTabIndex(self, direction=1):
@@ -267,9 +269,11 @@ class Home(QMainWindow, Ui_MainWindowHome):
                 return currentIndex-1
         
     def refreshApplication(self):
+        self.lineEditCreatorName.clear()
         self.tableWidgetData.setRowCount(0)
         self.widgetWebPage.load(QUrl(self._url))
-        # self.widgetWebPag
+        self.spinBoxTransactionAmount.setValue(0)
+        self.lineEditAccountCreatorAccountNumber.clear()
 
     def openWebEngineTab(self):
         self.tabWidgetHome.setCurrentWidget(self.tabUploadData)
@@ -415,9 +419,6 @@ class Home(QMainWindow, Ui_MainWindowHome):
             self.tabWidgetHome.setCurrentWidget(self.tabData)
             Message = self.Message.warning(self, "خطأ", "لم يتم اضافة اي معاملات، ادخل معاملة علي الاقل", self.Message.StandardButton.Ok)
 
-    def closeEvent(self, event:QEvent):
-        event.accept()
-    
     def autoTransaction(self):
         self.lineEditCreatorName.setText(self.lineEditDefaultCustomerName.text())
         self.lineEditAccountCreatorAccountNumber.setText(self.lineEditDefaultAccountNumber.text())
@@ -425,9 +426,14 @@ class Home(QMainWindow, Ui_MainWindowHome):
         self.spinBoxTransactionAmount.setValue(10)
         self.pushButtonAdd.setFocus()
 
+    def closeEvent(self, event:QEvent):
+        event.accept()
+    
     def keyPressEvent(self, event): 
         if event.key() == Qt.Key.Key_F9:
             os.startfile(self._url)
+        if event.key() == Qt.Key.Key_F5:
+            self.refreshApplication()
         if event.key() == Qt.Key.Key_F11:
             if self.isMaximized():
                 self.showNormal()
