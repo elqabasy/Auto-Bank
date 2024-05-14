@@ -3,14 +3,15 @@ import sqlite3
 
 # me
 
+
 class Database:
-    def __init__(self, DBName:str) -> None:
+    def __init__(self, DBName: str) -> None:
         self.DBCursor = None
         self.DBFile = str(DBName).strip()
         self.DBSql = sqlite3.connect(self.DBFile)
         self.DBCursor = self.DBSql.cursor()
 
-    def Execute(self,Query:str=None, params:dict=None):
+    def Execute(self, Query: str = None, params: dict = None):
         if self.DBCursor and Query:
             try:
                 if params:
@@ -25,7 +26,7 @@ class Database:
                 return Error
         return False
 
-    def Query(self, Query:str=None, params:dict=None):
+    def Query(self, Query: str = None, params: dict = None):
         if Query:
             if params:
                 self.DBCursor.execute(Query, params)
@@ -42,22 +43,20 @@ class Database:
             return Error
 
 
-
 class BankDatabase(Database):
-    def __init__(self, DBName:str) -> None:
+    def __init__(self, DBName: str) -> None:
         super().__init__(DBName)
 
-
     def getData(self):
-        QUERY_STR:str   = "SELECT Name, Serial FROM `Banks`;"
-        RESULT:str      = self.Query(QUERY_STR)
+        QUERY_STR: str = "SELECT Name, Serial FROM `Banks`;"
+        RESULT: str = self.Query(QUERY_STR)
         return RESULT
 
-    def getBankName(self, code:str):
+    def getBankName(self, code: str):
         pass
-    
-    def getBankCode(self, name:str):
+
+    def getBankCode(self, name: str):
         name = str(name).strip()
-        QUERY_STR:str   = "SELECT Serial FROM `Banks` WHERE Name = ?"
-        RESULT:str      = self.Query(QUERY_STR, (name,))
+        QUERY_STR: str = "SELECT Serial FROM `Banks` WHERE Name = ?"
+        RESULT: str = self.Query(QUERY_STR, (name,))
         return RESULT
