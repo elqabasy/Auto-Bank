@@ -169,3 +169,10 @@ source/automation.py
 test.py
 Auto-Bank/converter.py
 Auto-Bank/main_test.py
+Auto-Bank/utils/automation/__init__.py
+Auto-Bank/utils/automation/automation.py
+Auto-Bank/utils/automation/automation.py.txt
+Auto-Bank/utils/automation/ErrorSignal.py
+Auto-Bank/utils/automation/ErrorSignal.py.txt
+.vscode/
+trunck/
